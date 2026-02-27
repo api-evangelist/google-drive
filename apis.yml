@@ -1,0 +1,61 @@
+name: Google Drive API
+description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive.
+image: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+created: '2024-01-15'
+modified: '2024-01-15'
+specificationVersion: '0.18'
+url: https://developers.google.com/drive
+apis:
+- name: Google Drive API v3
+  description: REST API for managing files and folders in Google Drive
+  image: https://www.gstatic.com/images/branding/product/2x/drive_48dp.png
+  humanUrl: https://developers.google.com/drive/api/v3/about-sdk
+  baseUrl: https://www.googleapis.com/drive/v3
+  tags:
+  - Storage
+  - Files
+  - Cloud
+  - Collaboration
+  properties:
+  - type: Documentation
+    url: https://developers.google.com/drive/api/v3/reference
+  - type: OpenAPI
+    url: https://developers.google.com/discovery/v1/apis/drive/v3/rest
+  - type: Authentication
+    url: https://developers.google.com/drive/api/v3/about-auth
+  - type: Quickstart
+    url: https://developers.google.com/drive/api/v3/quickstart/python
+  - type: Pricing
+    url: https://workspace.google.com/pricing
+  - type: Terms of Service
+    url: https://developers.google.com/terms
+  - type: OAuth Scopes
+    url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
+  contact:
+  - type: Support
+    url: https://developers.google.com/drive/api/v3/support
+common:
+- type: Portal
+  url: https://console.cloud.google.com/
+- type: Getting Started
+  url: https://developers.google.com/drive/api/v3/enable-drive-api
+- type: Authentication
+  url: https://developers.google.com/identity/protocols/oauth2
+- type: Change Log
+  url: https://developers.google.com/drive/api/v3/releases
+- type: Rate Limits
+  url: https://developers.google.com/drive/api/v3/handle-errors#rate-limit-exceeded
+- type: Status
+  url: https://www.google.com/appsstatus
+maintainers:
+- name: Google
+  email: drive-api-support@google.com
+  url: https://developers.google.com/drive
+tags:
+- Google
+- Drive
+- Storage
+- Files
+- Cloud Storage
+- Document Management
+- Collaboration
