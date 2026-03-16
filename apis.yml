@@ -1,5 +1,5 @@
 aid: google-drive
-name: Google Drive API
+name: Google Drive
 description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive.
 image: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
 created: '2024-01-15'
