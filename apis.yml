@@ -1,9 +1,11 @@
+aid: google-drive
 name: Google Drive API
 description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive.
 image: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
 created: '2024-01-15'
-modified: '2024-01-15'
-specificationVersion: '0.18'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+type: Index
 url: https://developers.google.com/drive
 apis:
 - name: Google Drive API v3
@@ -48,9 +50,8 @@ common:
 - type: Status
   url: https://www.google.com/appsstatus
 maintainers:
-- name: Google
-  email: drive-api-support@google.com
-  url: https://developers.google.com/drive
+- FN: Kin Lane
+  email: kin@apievangelist.com
 tags:
 - Google
 - Drive
