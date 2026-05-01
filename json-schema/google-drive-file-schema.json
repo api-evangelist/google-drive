@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/json-schema/google-drive-file-schema.json",
+  "title": "Google Drive File",
+  "description": "JSON Schema for a Google Drive file resource as returned by the Google Drive REST API v3.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the file."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the file."
+    },
+    "mimeType": {
+      "type": "string",
+      "description": "The MIME type of the file."
+    },
+    "parents": {
+      "type": "array",
+      "description": "The IDs of the parent folders containing the file.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the file was created."
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The last time the file was modified."
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the file's content in bytes."
+    },
+    "trashed": {
+      "type": "boolean",
+      "description": "Whether the file has been trashed."
+    },
+    "starred": {
+      "type": "boolean",
+      "description": "Whether the user has starred the file."
+    },
+    "shared": {
+      "type": "boolean",
+      "description": "Whether the file has been shared."
+    },
+    "webViewLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "A link for opening the file in the relevant Google editor or viewer."
+    },
+    "webContentLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "A link for downloading the content of the file."
+    },
+    "iconLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "A static, unauthenticated link to the file's icon."
+    },
+    "owners": {
+      "type": "array",
+      "description": "The owners of the file.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "displayName": {"type": "string"},
+          "emailAddress": {"type": "string"},
+          "permissionId": {"type": "string"}
+        }
+      }
+    }
+  },
+  "required": ["id", "name", "mimeType"]
+}

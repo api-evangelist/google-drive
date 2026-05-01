@@ -1,0 +1,24 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "drive": "https://developers.google.com/drive/api/v3/reference#",
+    "File": "drive:File",
+    "id": "drive:fileId",
+    "name": "name",
+    "mimeType": "encodingFormat",
+    "parents": "isPartOf",
+    "createdTime": "dateCreated",
+    "modifiedTime": "dateModified",
+    "size": "contentSize",
+    "trashed": "drive:trashed",
+    "starred": "drive:starred",
+    "shared": "drive:shared",
+    "webViewLink": "url",
+    "webContentLink": "contentUrl",
+    "iconLink": "image",
+    "owners": "author",
+    "Permission": "drive:Permission",
+    "role": "drive:role",
+    "emailAddress": "email"
+  }
+}

@@ -1,19 +1,34 @@
 aid: google-drive
 name: Google Drive
-description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive.
-image: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+description: >-
+  The Google Drive API allows developers to integrate with Google Drive to
+  create, read, update, and delete files and folders stored in Google Drive.
+  The v3 REST API supports file metadata operations, content upload and
+  download, folder hierarchies, sharing and permissions, and search across a
+  user's Drive.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-03-16'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 type: Index
-url: https://developers.google.com/drive
+tags:
+  - Cloud Storage
+  - Collaboration
+  - Document Management
+  - Drive
+  - Files
+  - Google
+  - Storage
 apis:
   - name: Google Drive API v3
     description: >-
-      REST API for managing files and folders in Google Drive.
+      REST API for managing files and folders in Google Drive. Supports file
+      metadata operations, content upload and download, sharing and permissions,
+      revisions, comments, and changes feeds.
     image: https://www.gstatic.com/images/branding/product/2x/drive_48dp.png
-    humanUrl: https://developers.google.com/drive/api/v3/about-sdk
-    baseUrl: https://www.googleapis.com/drive/v3
+    humanURL: https://developers.google.com/drive/api/v3/about-sdk
+    baseURL: https://www.googleapis.com/drive/v3
     tags:
       - Cloud
       - Collaboration
@@ -23,7 +38,9 @@ apis:
       - type: Documentation
         url: https://developers.google.com/drive/api/v3/reference
       - type: OpenAPI
-        url: https://developers.google.com/discovery/v1/apis/drive/v3/rest
+        url: openapi/google-drive-openapi.yml
+      - type: JSONSchema
+        url: json-schema/google-drive-file-schema.json
       - type: Authentication
         url: https://developers.google.com/drive/api/v3/about-auth
       - type: Quickstart
@@ -50,14 +67,8 @@ common:
     url: https://developers.google.com/drive/api/v3/handle-errors#rate-limit-exceeded
   - type: Status
     url: https://www.google.com/appsstatus
+  - type: JSON-LD
+    url: json-ld/google-drive-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-tags:
-  - Cloud Storage
-  - Collaboration
-  - Document Management
-  - Drive
-  - Files
-  - Google
-  - Storage

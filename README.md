@@ -1,7 +1,7 @@
-# Google Drive API (google-drive)
-The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive.
+# Google Drive (google-drive)
+The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder hierarchies, sharing and permissions, and search across a user's Drive.
 
-**URL:** [Visit APIs.json URL](https://developers.google.com/drive)
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/apis.yml)
 
 ## Tags:
 
@@ -9,16 +9,17 @@ The Google Drive API allows developers to integrate with Google Drive to create,
 
 ## Timestamps
 
-- **Created:** 2024-01-15 
-- **Modified:** 2024-01-15 
+- **Created:** 2024-01-15
+- **Modified:** 2026-04-28
 
 ## APIs
 
 ### Google Drive API v3
-REST API for managing files and folders in Google Drive
+REST API for managing files and folders in Google Drive. Supports file metadata operations, content upload and download, sharing and permissions, revisions, comments, and changes feeds.
 
 **Human URL:** [https://developers.google.com/drive/api/v3/about-sdk](https://developers.google.com/drive/api/v3/about-sdk)
 
+**Base URL:** https://www.googleapis.com/drive/v3
 
 #### Tags:
 
@@ -27,7 +28,8 @@ REST API for managing files and folders in Google Drive
 #### Properties
 
 - [Documentation](https://developers.google.com/drive/api/v3/reference)
-- [OpenAPI](https://developers.google.com/discovery/v1/apis/drive/v3/rest)
+- [OpenAPI](openapi/google-drive-openapi.yml)
+- [JSONSchema](json-schema/google-drive-file-schema.json)
 - [Authentication](https://developers.google.com/drive/api/v3/about-auth)
 - [Quickstart](https://developers.google.com/drive/api/v3/quickstart/python)
 - [Pricing](https://workspace.google.com/pricing)
@@ -42,9 +44,10 @@ REST API for managing files and folders in Google Drive
 - [Change Log](https://developers.google.com/drive/api/v3/releases)
 - [Rate Limits](https://developers.google.com/drive/api/v3/handle-errors#rate-limit-exceeded)
 - [Status](https://www.google.com/appsstatus)
+- [JSON-LD](json-ld/google-drive-context.jsonld)
 
 ## Maintainers
 
-**FN:** Google
+**FN:** Kin Lane
 
-**Email:** drive-api-support@google.com
+**Email:** kin@apievangelist.com
