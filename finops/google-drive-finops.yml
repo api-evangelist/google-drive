@@ -1,0 +1,75 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Google Drive (and Workspace)
+providerId: google-drive
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - File Storage and Productivity
+description: FOCUS-aligned FinOps for Google Drive (and Workspace).
+sources:
+  - https://workspace.google.com/pricing.html
+  - https://focus.finops.org/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Google Drive (and Workspace)
+serviceCategory: File Storage and Productivity
+billingModel:
+  pricingCategory: Pay-As-You-Go + Committed Use
+  billingFrequency: Monthly
+  billingCurrency: USD
+focusColumns:
+  ServiceName: Google Drive (and Workspace)
+  ServiceCategory: File Storage and Productivity
+  ProviderName: Google Drive (and Workspace)
+  PublisherName: Google Drive (and Workspace)
+  BillingCurrency: USD
+meters:
+  - name: compute_hours
+    unit: instance-hour
+    aggregation: sum
+    dimensions:
+      - service
+      - region
+      - instance_type
+      - tenant
+  - name: storage
+    unit: GB-month
+    aggregation: max
+    dimensions:
+      - service
+      - tier
+  - name: data_transfer
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - egress_type
+      - region_pair
+  - name: api_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - service
+      - operation
+  - name: managed_services
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - service
+principles:
+  - name: Visibility
+    description: Track Google Drive (and Workspace) consumption monthly.
+  - name: Allocation
+    description: Tag usage to teams/cost centers for chargeback.
+  - name: Optimization
+    description: Right-size; reclaim unused entitlements.
+  - name: Accountability
+    description: Set spend alerts; quarterly review.
