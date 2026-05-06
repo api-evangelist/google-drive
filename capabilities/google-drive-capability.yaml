@@ -1,0 +1,400 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Drive API
+  description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files
+    and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder
+    hierarchies, sharing and permissions, and search across a user's Drive.
+  tags:
+  - Google
+  - Drive
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: google-drive
+    baseUri: https://www.googleapis.com/drive/v3
+    description: Google Drive API HTTP API.
+    resources:
+    - name: files
+      path: /files
+      operations:
+      - name: listfiles
+        method: GET
+        description: List files
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Query string for searching files.
+        - name: pageSize
+          in: query
+          type: integer
+          description: Maximum number of files to return per page.
+        - name: pageToken
+          in: query
+          type: string
+          description: Token for continuing a previous list request.
+        - name: fields
+          in: query
+          type: string
+          description: Selector specifying which fields to include in a response.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfile
+        method: POST
+        description: Create a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-fileid
+      path: /files/{fileId}
+      operations:
+      - name: getfile
+        method: GET
+        description: Get a file
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          required: true
+          description: The ID of the file.
+        - name: fields
+          in: query
+          type: string
+          description: Selector specifying which fields to include in a response.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatefile
+        method: PATCH
+        description: Update a file
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          required: true
+          description: The ID of the file.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletefile
+        method: DELETE
+        description: Delete a file
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          required: true
+          description: The ID of the file.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-fileid-copy
+      path: /files/{fileId}/copy
+      operations:
+      - name: copyfile
+        method: POST
+        description: Copy a file
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          required: true
+          description: The ID of the file to copy.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-fileid-permissions
+      path: /files/{fileId}/permissions
+      operations:
+      - name: listpermissions
+        method: GET
+        description: List permissions
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          required: true
+          description: The ID of the file.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createpermission
+        method: POST
+        description: Create a permission
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          required: true
+          description: The ID of the file.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: google-drive-rest
+    description: REST adapter for Google Drive API.
+    resources:
+    - path: /files
+      name: listfiles
+      operations:
+      - method: GET
+        name: listfiles
+        description: List files
+        call: google-drive.listfiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files
+      name: createfile
+      operations:
+      - method: POST
+        name: createfile
+        description: Create a file
+        call: google-drive.createfile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files/{fileId}
+      name: getfile
+      operations:
+      - method: GET
+        name: getfile
+        description: Get a file
+        call: google-drive.getfile
+        with:
+          fileId: rest.fileId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files/{fileId}
+      name: updatefile
+      operations:
+      - method: PATCH
+        name: updatefile
+        description: Update a file
+        call: google-drive.updatefile
+        with:
+          fileId: rest.fileId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files/{fileId}
+      name: deletefile
+      operations:
+      - method: DELETE
+        name: deletefile
+        description: Delete a file
+        call: google-drive.deletefile
+        with:
+          fileId: rest.fileId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files/{fileId}/copy
+      name: copyfile
+      operations:
+      - method: POST
+        name: copyfile
+        description: Copy a file
+        call: google-drive.copyfile
+        with:
+          fileId: rest.fileId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files/{fileId}/permissions
+      name: listpermissions
+      operations:
+      - method: GET
+        name: listpermissions
+        description: List permissions
+        call: google-drive.listpermissions
+        with:
+          fileId: rest.fileId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /files/{fileId}/permissions
+      name: createpermission
+      operations:
+      - method: POST
+        name: createpermission
+        description: Create a permission
+        call: google-drive.createpermission
+        with:
+          fileId: rest.fileId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: google-drive-mcp
+    transport: http
+    description: MCP adapter for Google Drive API for AI agent use.
+    tools:
+    - name: listfiles
+      description: List files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-drive.listfiles
+      with:
+        q: tools.q
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+        fields: tools.fields
+      inputParameters:
+      - name: q
+        type: string
+        description: Query string for searching files.
+      - name: pageSize
+        type: integer
+        description: Maximum number of files to return per page.
+      - name: pageToken
+        type: string
+        description: Token for continuing a previous list request.
+      - name: fields
+        type: string
+        description: Selector specifying which fields to include in a response.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createfile
+      description: Create a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-drive.createfile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfile
+      description: Get a file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-drive.getfile
+      with:
+        fileId: tools.fileId
+        fields: tools.fields
+      inputParameters:
+      - name: fileId
+        type: string
+        description: The ID of the file.
+        required: true
+      - name: fields
+        type: string
+        description: Selector specifying which fields to include in a response.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatefile
+      description: Update a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-drive.updatefile
+      with:
+        fileId: tools.fileId
+      inputParameters:
+      - name: fileId
+        type: string
+        description: The ID of the file.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletefile
+      description: Delete a file
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-drive.deletefile
+      with:
+        fileId: tools.fileId
+      inputParameters:
+      - name: fileId
+        type: string
+        description: The ID of the file.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: copyfile
+      description: Copy a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-drive.copyfile
+      with:
+        fileId: tools.fileId
+      inputParameters:
+      - name: fileId
+        type: string
+        description: The ID of the file to copy.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listpermissions
+      description: List permissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-drive.listpermissions
+      with:
+        fileId: tools.fileId
+      inputParameters:
+      - name: fileId
+        type: string
+        description: The ID of the file.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createpermission
+      description: Create a permission
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-drive.createpermission
+      with:
+        fileId: tools.fileId
+      inputParameters:
+      - name: fileId
+        type: string
+        description: The ID of the file.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
