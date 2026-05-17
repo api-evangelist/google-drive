@@ -43,7 +43,7 @@ apis:
         url: https://developers.google.com/drive/api/v3/quickstart/python
       - type: Pricing
         url: https://workspace.google.com/pricing
-      - type: Terms of Service
+      - type: TermsOfService
         url: https://developers.google.com/terms
       - type: OAuth Scopes
         url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
@@ -53,17 +53,17 @@ apis:
 common:
   - type: Portal
     url: https://console.cloud.google.com/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developers.google.com/drive/api/v3/enable-drive-api
   - type: Authentication
     url: https://developers.google.com/identity/protocols/oauth2
-  - type: Change Log
+  - type: ChangeLog
     url: https://developers.google.com/drive/api/v3/releases
-  - type: Rate Limits
+  - type: RateLimits
     url: https://developers.google.com/drive/api/v3/handle-errors#rate-limit-exceeded
-  - type: Status
+  - type: StatusPage
     url: https://www.google.com/appsstatus
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/google-drive-context.jsonld
   - type: Features
     data:
