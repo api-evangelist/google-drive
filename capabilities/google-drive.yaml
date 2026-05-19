@@ -1,21 +1,23 @@
 naftiko: 1.0.0-alpha2
 info:
   label: Google Drive API
-  description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files
-    and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder
-    hierarchies, sharing and permissions, and search across a user's Drive.
+  description: 'Google Drive API. 8 operations. Lead operation: List files. Self-contained Naftiko capability covering one
+    Google Drive business surface.'
   tags:
-  - Google
-  - Drive
-  - API
-  created: '2026-05-06'
-  modified: '2026-05-06'
+  - Google Drive
+  - Google Drive API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_DRIVE_API_KEY: GOOGLE_DRIVE_API_KEY
 capability:
   consumes:
   - type: http
     namespace: google-drive
     baseUri: https://www.googleapis.com/drive/v3
-    description: Google Drive API HTTP API.
+    description: Google Drive API business capability. Self-contained, no shared references.
     resources:
     - name: files
       path: /files
@@ -23,6 +25,11 @@ capability:
       - name: listfiles
         method: GET
         description: List files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
         inputParameters:
         - name: q
           in: query
@@ -40,11 +47,6 @@ capability:
           in: query
           type: string
           description: Selector specifying which fields to include in a response.
-        outputRawFormat: json
-        outputParameters:
-        - name: result
-          type: object
-          value: $.
       - name: createfile
         method: POST
         description: Create a file
@@ -53,131 +55,159 @@ capability:
         - name: result
           type: object
           value: $.
-    - name: files-fileid
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: files-fileId
       path: /files/{fileId}
       operations:
       - name: getfile
         method: GET
         description: Get a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
         inputParameters:
         - name: fileId
           in: path
           type: string
-          required: true
           description: The ID of the file.
+          required: true
         - name: fields
           in: query
           type: string
           description: Selector specifying which fields to include in a response.
-        outputRawFormat: json
-        outputParameters:
-        - name: result
-          type: object
-          value: $.
       - name: updatefile
         method: PATCH
         description: Update a file
-        inputParameters:
-        - name: fileId
-          in: path
-          type: string
-          required: true
-          description: The ID of the file.
         outputRawFormat: json
         outputParameters:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          description: The ID of the file.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
       - name: deletefile
         method: DELETE
         description: Delete a file
-        inputParameters:
-        - name: fileId
-          in: path
-          type: string
-          required: true
-          description: The ID of the file.
         outputRawFormat: json
         outputParameters:
         - name: result
           type: object
           value: $.
-    - name: files-fileid-copy
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          description: The ID of the file.
+          required: true
+    - name: files-fileId-copy
       path: /files/{fileId}/copy
       operations:
       - name: copyfile
         method: POST
         description: Copy a file
-        inputParameters:
-        - name: fileId
-          in: path
-          type: string
-          required: true
-          description: The ID of the file to copy.
         outputRawFormat: json
         outputParameters:
         - name: result
           type: object
           value: $.
-    - name: files-fileid-permissions
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          description: The ID of the file to copy.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: files-fileId-permissions
       path: /files/{fileId}/permissions
       operations:
       - name: listpermissions
         method: GET
         description: List permissions
-        inputParameters:
-        - name: fileId
-          in: path
-          type: string
-          required: true
-          description: The ID of the file.
         outputRawFormat: json
         outputParameters:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          description: The ID of the file.
+          required: true
       - name: createpermission
         method: POST
         description: Create a permission
-        inputParameters:
-        - name: fileId
-          in: path
-          type: string
-          required: true
-          description: The ID of the file.
         outputRawFormat: json
         outputParameters:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: fileId
+          in: path
+          type: string
+          description: The ID of the file.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
   exposes:
   - type: rest
-    port: 8080
     namespace: google-drive-rest
-    description: REST adapter for Google Drive API.
+    port: 8080
+    description: REST adapter for Google Drive API. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
     resources:
-    - path: /files
-      name: listfiles
+    - path: /v1/files
+      name: files
+      description: REST surface for files.
       operations:
       - method: GET
         name: listfiles
         description: List files
         call: google-drive.listfiles
+        with:
+          q: rest.q
+          pageSize: rest.pageSize
+          pageToken: rest.pageToken
+          fields: rest.fields
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files
-      name: createfile
-      operations:
       - method: POST
         name: createfile
         description: Create a file
         call: google-drive.createfile
+        with:
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files/{fileId}
-      name: getfile
+    - path: /v1/files/{fileid}
+      name: files-fileid
+      description: REST surface for files-fileId.
       operations:
       - method: GET
         name: getfile
@@ -185,24 +215,20 @@ capability:
         call: google-drive.getfile
         with:
           fileId: rest.fileId
+          fields: rest.fields
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files/{fileId}
-      name: updatefile
-      operations:
       - method: PATCH
         name: updatefile
         description: Update a file
         call: google-drive.updatefile
         with:
           fileId: rest.fileId
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files/{fileId}
-      name: deletefile
-      operations:
       - method: DELETE
         name: deletefile
         description: Delete a file
@@ -212,8 +238,9 @@ capability:
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files/{fileId}/copy
-      name: copyfile
+    - path: /v1/files/{fileid}/copy
+      name: files-fileid-copy
+      description: REST surface for files-fileId-copy.
       operations:
       - method: POST
         name: copyfile
@@ -221,11 +248,13 @@ capability:
         call: google-drive.copyfile
         with:
           fileId: rest.fileId
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files/{fileId}/permissions
-      name: listpermissions
+    - path: /v1/files/{fileid}/permissions
+      name: files-fileid-permissions
+      description: REST surface for files-fileId-permissions.
       operations:
       - method: GET
         name: listpermissions
@@ -236,25 +265,24 @@ capability:
         outputParameters:
         - type: object
           mapping: $.
-    - path: /files/{fileId}/permissions
-      name: createpermission
-      operations:
       - method: POST
         name: createpermission
         description: Create a permission
         call: google-drive.createpermission
         with:
           fileId: rest.fileId
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
   - type: mcp
-    port: 9090
     namespace: google-drive-mcp
+    port: 9090
     transport: http
-    description: MCP adapter for Google Drive API for AI agent use.
+    description: MCP adapter for Google Drive API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
     tools:
-    - name: listfiles
+    - name: list-files
       description: List files
       hints:
         readOnly: true
@@ -266,33 +294,22 @@ capability:
         pageSize: tools.pageSize
         pageToken: tools.pageToken
         fields: tools.fields
-      inputParameters:
-      - name: q
-        type: string
-        description: Query string for searching files.
-      - name: pageSize
-        type: integer
-        description: Maximum number of files to return per page.
-      - name: pageToken
-        type: string
-        description: Token for continuing a previous list request.
-      - name: fields
-        type: string
-        description: Selector specifying which fields to include in a response.
       outputParameters:
       - type: object
         mapping: $.
-    - name: createfile
+    - name: create-file
       description: Create a file
       hints:
         readOnly: false
         destructive: false
         idempotent: false
       call: google-drive.createfile
+      with:
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: getfile
+    - name: get-file
       description: Get a file
       hints:
         readOnly: true
@@ -302,35 +319,23 @@ capability:
       with:
         fileId: tools.fileId
         fields: tools.fields
-      inputParameters:
-      - name: fileId
-        type: string
-        description: The ID of the file.
-        required: true
-      - name: fields
-        type: string
-        description: Selector specifying which fields to include in a response.
       outputParameters:
       - type: object
         mapping: $.
-    - name: updatefile
+    - name: update-file
       description: Update a file
       hints:
         readOnly: false
         destructive: false
-        idempotent: false
+        idempotent: true
       call: google-drive.updatefile
       with:
         fileId: tools.fileId
-      inputParameters:
-      - name: fileId
-        type: string
-        description: The ID of the file.
-        required: true
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: deletefile
+    - name: delete-file
       description: Delete a file
       hints:
         readOnly: false
@@ -339,15 +344,10 @@ capability:
       call: google-drive.deletefile
       with:
         fileId: tools.fileId
-      inputParameters:
-      - name: fileId
-        type: string
-        description: The ID of the file.
-        required: true
       outputParameters:
       - type: object
         mapping: $.
-    - name: copyfile
+    - name: copy-file
       description: Copy a file
       hints:
         readOnly: false
@@ -356,15 +356,11 @@ capability:
       call: google-drive.copyfile
       with:
         fileId: tools.fileId
-      inputParameters:
-      - name: fileId
-        type: string
-        description: The ID of the file to copy.
-        required: true
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: listpermissions
+    - name: list-permissions
       description: List permissions
       hints:
         readOnly: true
@@ -373,15 +369,10 @@ capability:
       call: google-drive.listpermissions
       with:
         fileId: tools.fileId
-      inputParameters:
-      - name: fileId
-        type: string
-        description: The ID of the file.
-        required: true
       outputParameters:
       - type: object
         mapping: $.
-    - name: createpermission
+    - name: create-permission
       description: Create a permission
       hints:
         readOnly: false
@@ -390,11 +381,7 @@ capability:
       call: google-drive.createpermission
       with:
         fileId: tools.fileId
-      inputParameters:
-      - name: fileId
-        type: string
-        description: The ID of the file.
-        required: true
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
