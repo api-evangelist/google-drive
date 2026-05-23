@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Permission",
+  "title": "Permission",
+  "type": "object",
+  "description": "A permission for a file or shared drive.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the permission."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of grantee (user, group, domain, anyone)."
+    },
+    "role": {
+      "type": "string",
+      "description": "The role granted by this permission (owner, organizer, fileOrganizer, writer, commenter, reader)."
+    },
+    "emailAddress": {
+      "type": "string",
+      "description": "The email address of the grantee, if applicable."
+    },
+    "domain": {
+      "type": "string",
+      "description": "The domain to which the permission applies, if applicable."
+    }
+  }
+}

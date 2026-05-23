@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PermissionList",
+  "title": "PermissionList",
+  "type": "object",
+  "description": "A list of permissions for a file or shared drive.",
+  "properties": {
+    "nextPageToken": {
+      "type": "string",
+      "description": "Token to retrieve the next page of results."
+    },
+    "permissions": {
+      "type": "array",
+      "description": "The list of permissions.",
+      "items": {
+        "$ref": "#/components/schemas/Permission"
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "provider": "Google Drive",
+  "providerId": "google-drive",
+  "kind": "json-structure",
+  "description": "Structural overview of the Google Drive API surface; extracted from openapi/.",
+  "schemaCount": 4,
+  "operationCount": 8,
+  "schemas": [
+    {
+      "name": "File",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "FileList",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Permission",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "PermissionList",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/files",
+      "operationId": "listFiles",
+      "summary": "List files",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/files",
+      "operationId": "createFile",
+      "summary": "Create a file",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/files/{fileId}",
+      "operationId": "getFile",
+      "summary": "Get a file",
+      "tags": []
+    },
+    {
+      "method": "DELETE",
+      "path": "/files/{fileId}",
+      "operationId": "deleteFile",
+      "summary": "Delete a file",
+      "tags": []
+    },
+    {
+      "method": "PATCH",
+      "path": "/files/{fileId}",
+      "operationId": "updateFile",
+      "summary": "Update a file",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/files/{fileId}/copy",
+      "operationId": "copyFile",
+      "summary": "Copy a file",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/files/{fileId}/permissions",
+      "operationId": "listPermissions",
+      "summary": "List permissions",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/files/{fileId}/permissions",
+      "operationId": "createPermission",
+      "summary": "Create a permission",
+      "tags": []
+    }
+  ]
+}
