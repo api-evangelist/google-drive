@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Drive API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List files",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/drive/v3/files",
+        "params": [
+          {
+            "name": "q",
+            "value": "",
+            "type": "query",
+            "description": "Query string for searching files."
+          },
+          {
+            "name": "pageSize",
+            "value": "",
+            "type": "query",
+            "description": "Maximum number of files to return per page."
+          },
+          {
+            "name": "pageToken",
+            "value": "",
+            "type": "query",
+            "description": "Token for continuing a previous list request."
+          },
+          {
+            "name": "fields",
+            "value": "",
+            "type": "query",
+            "description": "Selector specifying which fields to include in a response."
+          }
+        ]
+      },
+      "docs": "Lists the user's files. Supports query parameters for filtering, ordering, paging, and selecting fields to return."
+    },
+    {
+      "info": {
+        "name": "Create a file",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/drive/v3/files",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Creates a new file in Google Drive. For uploading file content use the upload endpoint; this endpoint creates metadata-only files such as folders or shortcuts."
+    },
+    {
+      "info": {
+        "name": "Get a file",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/drive/v3/files/:fileId",
+        "params": [
+          {
+            "name": "fileId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the file."
+          },
+          {
+            "name": "fields",
+            "value": "",
+            "type": "query",
+            "description": "Selector specifying which fields to include in a response."
+          }
+        ]
+      },
+      "docs": "Gets a file's metadata or content by ID."
+    },
+    {
+      "info": {
+        "name": "Update a file",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://www.googleapis.com/drive/v3/files/:fileId",
+        "params": [
+          {
+            "name": "fileId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the file."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Updates a file's metadata and/or content."
+    },
+    {
+      "info": {
+        "name": "Delete a file",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://www.googleapis.com/drive/v3/files/:fileId",
+        "params": [
+          {
+            "name": "fileId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the file."
+          }
+        ]
+      },
+      "docs": "Permanently deletes a file owned by the user without moving it to the trash."
+    },
+    {
+      "info": {
+        "name": "Copy a file",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/drive/v3/files/:fileId/copy",
+        "params": [
+          {
+            "name": "fileId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the file to copy."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Creates a copy of a file and applies any requested updates with patch semantics."
+    },
+    {
+      "info": {
+        "name": "List permissions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/drive/v3/files/:fileId/permissions",
+        "params": [
+          {
+            "name": "fileId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the file."
+          }
+        ]
+      },
+      "docs": "Lists a file's or shared drive's permissions."
+    },
+    {
+      "info": {
+        "name": "Create a permission",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/drive/v3/files/:fileId/permissions",
+        "params": [
+          {
+            "name": "fileId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the file."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Creates a permission for a file or shared drive."
+    }
+  ],
+  "bundled": true
+}
