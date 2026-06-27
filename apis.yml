@@ -40,7 +40,7 @@ apis:
         url: json-schema/google-drive-file-schema.json
       - type: Authentication
         url: https://developers.google.com/drive/api/v3/about-auth
-      - type: Quickstart
+      - type: GettingStarted
         url: https://developers.google.com/drive/api/v3/quickstart/python
       - type: Pricing
         url: https://workspace.google.com/pricing
