@@ -52,6 +52,10 @@ apis:
       - type: Support
         url: https://developers.google.com/drive/api/v3/support
 common:
+  - type: VulnerabilityDisclosure
+    url: security/google-drive-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/google-drive-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/googleworkspace
   - type: Portal
