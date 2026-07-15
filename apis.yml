@@ -52,6 +52,8 @@ apis:
       - type: Support
         url: https://developers.google.com/drive/api/v3/support
 common:
+  - type: AgenticAccess
+    url: agentic-access/google-drive-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/google-drive-vulnerability-disclosure.yml
   - type: DomainSecurity
