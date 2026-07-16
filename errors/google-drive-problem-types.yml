@@ -1,0 +1,82 @@
+generated: '2026-06-20'
+method: searched
+format: google-json-error
+source: https://developers.google.com/workspace/drive/api/guides/handle-errors
+derived_from: openapi/google-drive-openapi.yml
+description: >-
+  Error catalog for the Google Drive API v3. The captured OpenAPI declares only
+  2xx/204 responses, so the HTTP error set and reason strings were read from
+  Google's Drive "Resolve errors" reference. Drive does NOT use RFC 9457
+  application/problem+json; it returns Google's standard error envelope.
+envelope:
+  shape: '{"error": {"code": <int>, "message": <string>, "errors": [{"domain","reason","message","location","locationType"}]}}'
+  reason_field: error.errors[].reason
+problems:
+  - status: 400
+    reason: badRequest
+    title: Bad request
+    remediation: Fix invalid query parameters, field selectors, or request body.
+  - status: 401
+    reason: authError
+    title: Invalid credentials
+    remediation: Refresh the OAuth 2.0 access token; the token is expired or invalid.
+  - status: 403
+    reason: dailyLimitExceeded
+    title: Daily limit exceeded
+    remediation: The project's daily quota is exhausted; request more quota or wait for reset.
+  - status: 403
+    reason: rateLimitExceeded
+    title: Rate limit exceeded
+    remediation: Slow down; implement exponential backoff with jitter.
+  - status: 403
+    reason: userRateLimitExceeded
+    title: User rate limit exceeded
+    remediation: Per-user request rate too high; back off and batch requests.
+  - status: 403
+    reason: sharingRateLimitExceeded
+    title: Sharing rate limit exceeded
+    remediation: Too many sharing/permission changes; slow permission mutations.
+  - status: 403
+    reason: insufficientFilePermissions
+    title: Insufficient file permissions
+    remediation: The user lacks the required role on the file; request access or elevate role.
+  - status: 403
+    reason: appNotAuthorizedToFile
+    title: App not authorized to file
+    remediation: The app used drive.file scope but did not create/open this file; use a broader scope or the Picker.
+  - status: 403
+    reason: storageQuotaExceeded
+    title: Storage quota exceeded
+    remediation: The user's Drive storage is full; free space or upgrade the plan.
+  - status: 403
+    reason: activeItemCreationLimitExceeded
+    title: Active item creation limit exceeded
+    remediation: The per-user active item creation limit was hit; reduce creation rate.
+  - status: 403
+    reason: teamDriveFileLimitExceeded
+    title: Shared drive file limit exceeded
+    remediation: The shared drive reached its item cap; remove items or use another drive.
+  - status: 403
+    reason: numChildrenInNonRootLimitExceeded
+    title: Folder child-count limit exceeded
+    remediation: A non-root folder exceeded its child-item limit; reorganize the hierarchy.
+  - status: 403
+    reason: myDriveHierarchyDepthLimitExceeded
+    title: My Drive hierarchy depth limit exceeded
+    remediation: Folder nesting is too deep; flatten the folder tree.
+  - status: 403
+    reason: teamDriveHierarchyTooDeep
+    title: Shared drive hierarchy too deep
+    remediation: Shared-drive folder nesting exceeds the depth limit; flatten the tree.
+  - status: 404
+    reason: notFound
+    title: File not found
+    remediation: The fileId does not exist or the user cannot see it; verify the ID and access.
+  - status: 429
+    reason: rateLimitExceeded
+    title: Too many requests
+    remediation: Sending too many requests too quickly; apply exponential backoff.
+  - status: 500
+    reason: internalError
+    title: Backend error
+    remediation: Transient server error; retry with exponential backoff.

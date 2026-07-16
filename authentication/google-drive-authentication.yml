@@ -1,0 +1,40 @@
+generated: '2026-06-20'
+method: searched
+source: openapi/google-drive-openapi.yml
+docs: https://developers.google.com/workspace/drive/api/guides/about-auth
+description: >-
+  Authentication profile for the Google Drive API v3. The captured OpenAPI does
+  not declare securitySchemes, so this profile was upgraded from Google's Drive
+  auth documentation. All Drive API requests require an OAuth 2.0 access token
+  (three-legged for user data; two-legged service-account / domain-wide delegation
+  for Workspace). API keys authenticate only fully public file reads. Scope detail
+  lives in scopes/google-drive-scopes.yml.
+summary:
+  types: [oauth2, apiKey]
+  api_key_in: [query]
+  oauth2_flows: [authorizationCode, deviceCode, jwt-bearer]
+schemes:
+  - name: OAuth2
+    type: oauth2
+    sources: [docs]
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+        tokenUrl: https://oauth2.googleapis.com/token
+        refresh: true
+      - flow: deviceCode
+        deviceAuthorizationUrl: https://oauth2.googleapis.com/device/code
+        tokenUrl: https://oauth2.googleapis.com/token
+      - flow: serviceAccount
+        description: >-
+          JWT-bearer (RFC 7523) service-account flow, optionally with Workspace
+          domain-wide delegation to impersonate users.
+        tokenUrl: https://oauth2.googleapis.com/token
+    revocation: https://oauth2.googleapis.com/revoke
+    discovery: well-known/google-drive-openid-configuration.json
+  - name: ApiKey
+    type: apiKey
+    in: query
+    name: key
+    sources: [docs]
+    note: Authenticates access to publicly shared files only; cannot access private user data.

@@ -1,0 +1,28 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the schema $ref links and id-reference fields in
+  openapi/google-drive-openapi.yml (File, FileList, Permission, PermissionList)
+  and the Google Drive v3 object reference. Captures the core file/permission
+  entity graph.
+docs: https://developers.google.com/workspace/drive/api/reference/rest/v3
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name; direction is from the entity that owns the reference.
+entities:
+  - {name: File, id_field: id, domain: files, description: A file or folder in Drive (folders are files with mimeType application/vnd.google-apps.folder).}
+  - {name: Permission, id_field: id, domain: sharing, description: A sharing grant (role + grantee type) on a file or shared drive.}
+  - {name: Drive, id_field: id, domain: shared-drives, description: A shared drive (Team Drive) container of files.}
+  - {name: Revision, id_field: id, domain: files, description: A stored version of a file's binary content.}
+  - {name: Comment, id_field: id, domain: collaboration, description: A comment anchored on a file.}
+  - {name: Reply, id_field: id, domain: collaboration, description: A reply within a comment thread.}
+  - {name: Change, id_field: fileId, domain: changes, description: A change-feed entry for a file or shared drive.}
+relationships:
+  - {from: File, to: File, kind: has_many, via: parents, note: "A file references its parent folder ids via the parents[] array."}
+  - {from: File, to: Permission, kind: has_many, via: fileId}
+  - {from: File, to: Revision, kind: has_many, via: fileId}
+  - {from: File, to: Comment, kind: has_many, via: fileId}
+  - {from: Comment, to: Reply, kind: has_many, via: commentId}
+  - {from: Drive, to: File, kind: has_many, via: driveId}
+  - {from: Drive, to: Permission, kind: has_many, via: fileId}
+  - {from: Permission, to: File, kind: belongs_to, via: fileId}

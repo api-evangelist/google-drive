@@ -7,7 +7,7 @@ description: >-
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 type: Index
 tags:
@@ -48,6 +48,8 @@ apis:
         url: https://developers.google.com/terms
       - type: OAuth Scopes
         url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
+      - type: Overlay
+        url: overlays/google-drive-openapi-overlay.yaml
     contact:
       - type: Support
         url: https://developers.google.com/drive/api/v3/support
@@ -58,6 +60,34 @@ common:
     url: security/google-drive-vulnerability-disclosure.yml
   - type: DomainSecurity
     url: security/google-drive-domain-security.yml
+  - type: TrustCenter
+    url: security/google-drive-trust-center.yml
+  - type: Packages
+    url: packages/google-drive-packages.yml
+  - type: WellKnown
+    url: well-known/google-drive-well-known.yml
+  - type: MCPServer
+    url: mcp/google-drive-mcp.yml
+  - type: LLMsTxt
+    url: llms/google-drive-llms.txt
+  - type: Conformance
+    url: conformance/google-drive-conformance.yml
+  - type: ErrorCatalog
+    url: errors/google-drive-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/google-drive-lifecycle.yml
+  - type: OAuthScopes
+    url: scopes/google-drive-scopes.yml
+  - type: Authentication
+    url: authentication/google-drive-authentication.yml
+  - type: Conventions
+    url: conventions/google-drive-conventions.yml
+  - type: ChangeLog
+    url: changelog/google-drive-changelog.yml
+  - type: Components
+    url: components/google-drive-components.yml
+  - type: DataModel
+    url: data-model/google-drive-data-model.yml
   - type: GitHubOrganization
     url: https://github.com/googleworkspace
   - type: Portal

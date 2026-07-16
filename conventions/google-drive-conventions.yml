@@ -1,0 +1,53 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/workspace/drive/api/guides/about-files,
+  https://developers.google.com/workspace/drive/api/guides/fields-parameter,
+  https://developers.google.com/workspace/drive/api/guides/manage-uploads,
+  and derived from openapi/google-drive-openapi.yml
+description: >-
+  Cross-cutting request/response conventions that apply to every Google Drive
+  API v3 operation: authentication style, pagination, the fields partial-response
+  selector, upload protocols, change tracking, versioning, error envelope, and
+  rate-limit signaling.
+base_url: https://www.googleapis.com/drive/v3
+api_style: REST over HTTPS, JSON request/response
+authentication:
+  scheme: OAuth 2.0 Bearer access token (Authorization header); API key for public reads only.
+  detail: authentication/google-drive-authentication.yml
+pagination:
+  style: cursor
+  request_params:
+    pageSize: 1-1000 (endpoint-dependent default, e.g. 100 for files.list)
+    pageToken: opaque token from the previous response's nextPageToken
+  response_fields:
+    nextPageToken: present when more pages exist
+  detail: openapi listFiles / listPermissions
+partial_response:
+  supported: true
+  mechanism: fields query parameter (a FieldMask selector, e.g. "files(id,name,mimeType),nextPageToken")
+  note: Responses default to a limited field set; request nested fields explicitly to reduce payload.
+  docs: https://developers.google.com/workspace/drive/api/guides/fields-parameter
+uploads:
+  protocols: [simple (uploadType=media), multipart (uploadType=multipart), resumable (uploadType=resumable)]
+  host: https://www.googleapis.com/upload/drive/v3/files
+  note: Resumable is recommended for large or unreliable-network uploads.
+  docs: https://developers.google.com/workspace/drive/api/guides/manage-uploads
+change_tracking:
+  mechanism: changes.list with a startPageToken; push notifications via watch channels; Workspace Events API subscriptions.
+  docs: https://developers.google.com/workspace/drive/api/guides/manage-changes
+versioning:
+  scheme: uri-path
+  current: v3
+  detail: lifecycle/google-drive-lifecycle.yml
+error_envelope:
+  shape: '{"error": {"code", "message", "errors": [{"domain","reason","message"}]}}'
+  detail: errors/google-drive-problem-types.yml
+rate_limiting:
+  signaling: 403/429 with reason rateLimitExceeded / userRateLimitExceeded; no standard RateLimit headers.
+  guidance: Exponential backoff with jitter; per-project and per-user quotas.
+  detail: rate-limits/google-drive-rate-limits.yml
+  docs: https://developers.google.com/workspace/drive/api/guides/limits
+idempotency:
+  supported: false
+  note: No Idempotency-Key header; GET/PATCH/DELETE are naturally idempotent, POST (create/copy) is not.

@@ -1,0 +1,26 @@
+generated: '2026-06-20'
+method: searched
+probe: true
+source: https://cloud.google.com/security/compliance/offerings
+description: >-
+  Google's compliance / trust surface covering Google Workspace and the Drive
+  API. The automated probe found no dedicated trust.google.com host; Google
+  publishes its third-party audit certifications through the Google Cloud
+  compliance offerings hub, which covers Workspace services including Drive.
+url: https://cloud.google.com/security/compliance/offerings
+compliance_reports: https://cloud.google.com/security/compliance/compliance-reports-manager
+certifications:
+  - SOC 1
+  - SOC 2
+  - SOC 3
+  - ISO/IEC 27001
+  - ISO/IEC 27017
+  - ISO/IEC 27018
+  - ISO/IEC 27701
+  - PCI DSS
+  - HIPAA
+  - FedRAMP
+  - GDPR
+evidence:
+  - source: https://cloud.google.com/security/compliance/offerings
+    note: Google Cloud/Workspace compliance offerings hub; certifications listed are Google's published third-party audits covering Workspace/Drive.

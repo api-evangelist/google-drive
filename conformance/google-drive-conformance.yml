@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/google-drive-openapi.yml (pagination parameters, resource
+  shapes), the Google Drive auth docs, and the accounts.google.com OIDC/OAuth
+  discovery documents saved under well-known/. Cross-cutting standards the Drive
+  API conforms to.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      All Drive API requests are authorized with OAuth 2.0; authorization server
+      accounts.google.com exposes /.well-known/oauth-authorization-server (RFC 8414).
+  - id: oidc
+    conforms: true
+    evidence: >-
+      accounts.google.com publishes /.well-known/openid-configuration (issuer,
+      jwks_uri, userinfo_endpoint); Google identity is an OpenID Connect provider.
+  - id: rfc8414-oauth-metadata
+    conforms: true
+    evidence: well-known/google-drive-oauth-authorization-server.json returned 200.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      List endpoints use pageToken / pageSize request params and nextPageToken in
+      responses (openapi listFiles, listPermissions).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use Google's own {"error": {code, errors[], message}} JSON envelope,
+      not application/problem+json.
+  - id: fhir-r4
+    conforms: false
+  - id: fapi
+    conforms: false
+  - id: scim
+    conforms: false
+  - id: odata
+    conforms: false
+  - id: json-api
+    conforms: false
+  - id: mcp
+    conforms: true
+    evidence: >-
+      Google operates an official remote MCP server (drivemcp.googleapis.com);
+      see mcp/google-drive-mcp.yml.

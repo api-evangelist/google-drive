@@ -1,0 +1,36 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.google.com/workspace/release-notes
+description: >-
+  Recent dated Google Drive API changes captured from the Google Workspace
+  developer release notes (the live source of truth; this records the recent
+  window). Drive versions the API in the URI path (v3) — feature changes ship
+  continuously and are dated in the release notes rather than cut as new API
+  versions.
+docs: https://developers.google.com/workspace/release-notes
+versioning:
+  scheme: uri-path
+  current: v3
+  detail: lifecycle/google-drive-lifecycle.yml
+entries:
+  - date: '2026-07-15'
+    highlights:
+      - approvals.fileContentChangeBehavior field generally available (approval behavior when file content changes during review).
+  - date: '2026-05-21'
+    highlights:
+      - Drive MCP server (developer preview) adds the copy_file tool for AI agents to duplicate files.
+  - date: '2026-05-18'
+    highlights:
+      - Drive event subscriptions generally available via the Workspace Events API.
+  - date: '2026-04-21'
+    highlights:
+      - Approvals resource gains six methods (start, approve, decline, reassign, cancel, comment) for file approvals.
+  - date: '2026-02-25'
+    breaking:
+      - 'enforceExpansiveAccess query parameter deprecated across all permissions methods; use "folders with limited access" instead.'
+  - date: '2026-02-19'
+    highlights:
+      - '"Folders with limited access" launched (inheritedPermissionsDisabled) to restrict folder access to specific users.'
+  - date: '2025-07-16'
+    highlights:
+      - Download/print/copy restrictions extended to writers; new DownloadRestriction objects recommended over copyRequiresWriterPermission.

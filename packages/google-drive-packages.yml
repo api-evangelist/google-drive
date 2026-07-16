@@ -1,0 +1,62 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.google.com/workspace/drive/api/guides/libraries
+description: >-
+  First-party Google API client libraries usable with the Google Drive API v3.
+  Google ships a single generated client library per language that covers all
+  Google APIs (Drive is a service within it); the language-specific Drive
+  service package is noted where Google publishes a per-API artifact (Java, Ruby,
+  .NET, Go). Each registry existence was confirmed by HTTP probe at fetch time.
+packages:
+  - language: javascript
+    registry: npm
+    name: googleapis
+    url: https://www.npmjs.com/package/googleapis
+    source: https://github.com/googleapis/google-api-nodejs-client
+    install: npm install googleapis
+    official: true
+    note: Node.js client for all Google APIs including Drive v3 (google.drive('v3')).
+  - language: python
+    registry: pypi
+    name: google-api-python-client
+    url: https://pypi.org/project/google-api-python-client/
+    source: https://github.com/googleapis/google-api-python-client
+    install: pip install google-api-python-client
+    official: true
+    note: Uses build('drive', 'v3', ...); pair with google-auth for OAuth.
+  - language: java
+    registry: maven
+    name: com.google.apis:google-api-services-drive
+    url: https://central.sonatype.com/artifact/com.google.apis/google-api-services-drive
+    source: https://github.com/googleapis/google-api-java-client
+    install: 'implementation "com.google.apis:google-api-services-drive:v3-rev+"'
+    official: true
+  - language: dotnet
+    registry: nuget
+    name: Google.Apis.Drive.v3
+    url: https://www.nuget.org/packages/Google.Apis.Drive.v3
+    source: https://github.com/googleapis/google-api-dotnet-client
+    install: dotnet add package Google.Apis.Drive.v3
+    official: true
+  - language: go
+    registry: pkg.go.dev
+    name: google.golang.org/api/drive/v3
+    url: https://pkg.go.dev/google.golang.org/api/drive/v3
+    source: https://github.com/googleapis/google-api-go-client
+    install: go get google.golang.org/api/drive/v3
+    official: true
+  - language: ruby
+    registry: rubygems
+    name: google-apis-drive_v3
+    url: https://rubygems.org/gems/google-apis-drive_v3
+    source: https://github.com/googleapis/google-api-ruby-client
+    install: gem install google-apis-drive_v3
+    official: true
+  - language: php
+    registry: packagist
+    name: google/apiclient
+    url: https://packagist.org/packages/google/apiclient
+    source: https://github.com/googleapis/google-api-php-client
+    install: composer require google/apiclient
+    official: true
+    note: PHP client for all Google APIs; use Google\Service\Drive for Drive v3.

@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Google Drive API v3
+  version: 1.0.0
+extends: openapi/google-drive-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: google-drive
+      x-apievangelist-provider: Google
+      x-apievangelist-docs: https://developers.google.com/workspace/drive/api/v3/reference
+      x-apievangelist-mcp: https://drivemcp.googleapis.com/mcp/v1
+  - target: $.components
+    update:
+      securitySchemes:
+        oauth2:
+          type: oauth2
+          description: >-
+            Google Drive API OAuth 2.0. Authorization server accounts.google.com
+            (see well-known/google-drive-openid-configuration.json). Scopes in
+            scopes/google-drive-scopes.yml.
+          flows:
+            authorizationCode:
+              authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+              tokenUrl: https://oauth2.googleapis.com/token
+              scopes:
+                https://www.googleapis.com/auth/drive: View and manage all of a user's Drive files.
+                https://www.googleapis.com/auth/drive.file: Per-file access to files created or opened by the app.
+                https://www.googleapis.com/auth/drive.readonly: View and download all of a user's Drive files.
+  - target: $.paths./files.post
+    update:
+      x-agentic-consequence: write
+  - target: $.paths./files/{fileId}.delete
+    update:
+      x-agentic-consequence: write
+      x-agentic-note: Permanent delete; consider human-in-the-loop for agent contexts.

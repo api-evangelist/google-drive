@@ -1,0 +1,59 @@
+generated: '2026-06-20'
+method: searched
+source: openapi/google-drive-openapi.yml
+docs: https://developers.google.com/workspace/drive/api/guides/api-specific-auth
+description: >-
+  OAuth 2.0 scopes for the Google Drive API v3. The captured OpenAPI does not
+  declare securitySchemes, so the derive pass yields nothing; these scopes were
+  read from Google's Drive API-specific authorization reference and grouped by
+  Google's sensitivity tier (non-sensitive / sensitive / restricted). Restricted
+  scopes require a Google security assessment before production use. Authorization
+  server: accounts.google.com (see well-known/google-drive-openid-configuration.json).
+schemes:
+  - name: OAuth2
+    type: oauth2
+    source: docs
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+        tokenUrl: https://oauth2.googleapis.com/token
+scopes:
+  - scope: https://www.googleapis.com/auth/drive
+    tier: restricted
+    description: View and manage all of a user's Drive files.
+  - scope: https://www.googleapis.com/auth/drive.readonly
+    tier: restricted
+    description: View and download all of a user's Drive files.
+  - scope: https://www.googleapis.com/auth/drive.file
+    tier: non-sensitive
+    description: Create new Drive files, or view/modify files created or opened by the app (per-file access).
+  - scope: https://www.googleapis.com/auth/drive.appdata
+    tier: non-sensitive
+    description: View and manage the app's own hidden application-data folder.
+  - scope: https://www.googleapis.com/auth/drive.appfolder
+    tier: non-sensitive
+    description: View and manage the app's own hidden application-data folder.
+  - scope: https://www.googleapis.com/auth/drive.install
+    tier: non-sensitive
+    description: Allow the app to appear in the "Open with" or "New" menu.
+  - scope: https://www.googleapis.com/auth/drive.metadata
+    tier: restricted
+    description: View and manage metadata of files in the user's Drive.
+  - scope: https://www.googleapis.com/auth/drive.metadata.readonly
+    tier: restricted
+    description: View metadata for files in the user's Drive.
+  - scope: https://www.googleapis.com/auth/drive.apps.readonly
+    tier: sensitive
+    description: View apps authorized to access the user's Drive.
+  - scope: https://www.googleapis.com/auth/drive.activity
+    tier: restricted
+    description: View and add to the activity record of files in the user's Drive.
+  - scope: https://www.googleapis.com/auth/drive.activity.readonly
+    tier: restricted
+    description: View the activity record of files in the user's Drive.
+  - scope: https://www.googleapis.com/auth/drive.meet.readonly
+    tier: restricted
+    description: View Drive files created or edited by Google Meet.
+  - scope: https://www.googleapis.com/auth/drive.scripts
+    tier: restricted
+    description: Modify the behavior of the user's Google Apps Script scripts.

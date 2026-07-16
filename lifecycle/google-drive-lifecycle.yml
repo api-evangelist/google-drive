@@ -1,0 +1,32 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/workspace/drive/api/v3/reference,
+  https://developers.google.com/workspace/release-notes,
+  https://www.google.com/appsstatus
+description: >-
+  Versioning, deprecation, and availability posture for the Google Drive API.
+  Drive versions the API in the URI path (v3, current); backwards-incompatible
+  changes ship as a new major version and old versions are announced for
+  deprecation via the Workspace release notes rather than RFC 8594 headers.
+versioning:
+  scheme: uri-path
+  current: v3
+  mechanism: Version in the base path (/drive/v3); v2 is the prior generation.
+  docs: https://developers.google.com/workspace/drive/api/v3/reference
+deprecation:
+  policy_url: https://developers.google.com/workspace/drive/api/v3/reference
+  changelog: https://developers.google.com/workspace/release-notes
+  sunset_header: false
+  notes: >-
+    Feature deprecations (e.g. enforceExpansiveAccess query param deprecated
+    2026-02-25; copyRequiresWriterPermission superseded by DownloadRestriction)
+    are announced in the Workspace release notes. Drive does not emit RFC 8594
+    Sunset/Deprecation response headers.
+sla:
+  url: https://workspace.google.com/terms/sla.html
+  public_uptime_target: "99.9%"
+  notes: Google Workspace SLA commits to 99.9% monthly uptime for covered services.
+status_page: https://www.google.com/appsstatus/dashboard/
+rate_limits: https://developers.google.com/workspace/drive/api/guides/limits
+deprecated_operations: []

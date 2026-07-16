@@ -1,0 +1,38 @@
+generated: '2026-06-20'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the Google Drive
+  API base host (openapi servers[] + apis.yml baseURL) and the Google identity
+  authorization server that Drive OAuth uses. The API host www.googleapis.com
+  returns 404 for the discovery documents; the real OIDC/OAuth discovery lives on
+  accounts.google.com (the issuer for every Drive OAuth flow) and was saved
+  verbatim. Status is the HTTP code observed at fetch time.
+hosts:
+  - host: https://www.googleapis.com
+    note: Drive API baseURL host; serves API resources, not discovery documents.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://accounts.google.com
+    note: >-
+      Google's OAuth 2.0 / OpenID Connect authorization server — the issuer used
+      by the Google Drive API OAuth flows (authorization_endpoint, token via
+      oauth2.googleapis.com).
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        type: application/json
+        file: google-drive-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        type: application/json
+        file: google-drive-oauth-authorization-server.json
+  - host: https://developers.google.com
+    note: Developer docs host.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404

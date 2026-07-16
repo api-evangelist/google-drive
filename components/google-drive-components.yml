@@ -1,0 +1,25 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/workspace/drive/picker,
+  https://developers.google.com/workspace/drive/api/guides/about-buttons
+description: >-
+  Google's client-side / embeddable UI surfaces for Drive, distinct from the
+  server-side client libraries in packages/. These let a web app render Drive
+  file selection and sharing UX in the browser without building it from the REST
+  API.
+libraries:
+  - {name: Google API JavaScript client (gapi), loader: "https://apis.google.com/js/api.js", purpose: Loads the Picker and Drive UI modules in the browser.}
+families:
+  picker:
+    description: The Google Picker API — a browser dialog for users to select or upload files from their Drive; returns file ids to the host app.
+    docs: https://developers.google.com/workspace/drive/picker
+    components:
+      - {name: Picker, module: "gapi.load('picker')", description: File-selection dialog with configurable views (Docs, images, folders, uploads).}
+  buttons_widgets:
+    description: Prebuilt Drive UI buttons/widgets embeddable via the Drive UI integration and Share client.
+    docs: https://developers.google.com/workspace/drive/api/guides/about-buttons
+    components:
+      - {name: Google Drive Share button, description: Client-side share dialog widget for managing a file's permissions.}
+      - {name: Save to Drive button, description: Embeddable button that saves a URL/resource to the user's Drive.}
+      - {name: Open with (Drive UI integration), description: Registers an app in Drive's "Open with"/"New" menus (see drive.install scope).}
