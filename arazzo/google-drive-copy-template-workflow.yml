@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Google Drive Copy a Template File into a Folder
+  summary: Resolve a template file, copy it into a destination folder under a new name, and read the copy back.
+  description: >-
+    The document-generation pattern: keep a canonical template in Drive and
+    stamp out a renamed copy per customer, deal, or run. Drive's copy endpoint
+    applies patch semantics, so the new name and destination folder are supplied
+    in the copy request itself rather than as a follow-up update — one call
+    instead of three. This workflow resolves the template first so a bad
+    template id fails before anything is written, performs the copy, and reads
+    the copy back to confirm both its name and its parent folder. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleDriveApi
+  url: ../openapi/google-drive-openapi.yml
+  type: openapi
+workflows:
+- workflowId: copy-template-into-folder
+  summary: Duplicate a template file into a destination folder with a new name.
+  description: >-
+    Reads the template file's metadata, copies it into the destination folder
+    under the supplied name using the copy endpoint's patch semantics, and reads
+    the resulting copy back to verify its name and placement.
+  inputs:
+    type: object
+    required:
+    - templateFileId
+    - destinationFolderId
+    - copyName
+    properties:
+      templateFileId:
+        type: string
+        description: The ID of the template file to copy.
+      destinationFolderId:
+        type: string
+        description: The ID of the folder the copy should be created in.
+      copyName:
+        type: string
+        description: The name to give the new copy (e.g. "Acme Corp - Proposal").
+  steps:
+  - stepId: resolveTemplate
+    description: >-
+      Read the template's metadata to confirm it exists and to capture its MIME
+      type before copying, so a bad template id fails before any file is
+      written.
+    operationId: getFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $inputs.templateFileId
+    - name: fields
+      in: query
+      value: id,name,mimeType,trashed
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      templateId: $response.body#/id
+      templateName: $response.body#/name
+      templateMimeType: $response.body#/mimeType
+  - stepId: copyTemplate
+    description: >-
+      Copy the template, applying the new name and destination folder in the
+      same request. The copy endpoint uses patch semantics, so the parents array
+      supplied here replaces the template's own parents on the copy.
+    operationId: copyFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.resolveTemplate.outputs.templateId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.copyName
+        parents:
+        - $inputs.destinationFolderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      copyId: $response.body#/id
+      copyCreatedTime: $response.body#/createdTime
+  - stepId: confirmCopy
+    description: >-
+      Read the new copy back, selecting parents explicitly, to confirm it was
+      renamed and filed into the destination folder rather than beside the
+      template.
+    operationId: getFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.copyTemplate.outputs.copyId
+    - name: fields
+      in: query
+      value: id,name,mimeType,parents,createdTime,webViewLink
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedCopyId: $response.body#/id
+      confirmedCopyName: $response.body#/name
+      confirmedParents: $response.body#/parents
+      copyWebViewLink: $response.body#/webViewLink
+  outputs:
+    templateName: $steps.resolveTemplate.outputs.templateName
+    copyId: $steps.confirmCopy.outputs.confirmedCopyId
+    copyName: $steps.confirmCopy.outputs.confirmedCopyName
+    copyWebViewLink: $steps.confirmCopy.outputs.copyWebViewLink

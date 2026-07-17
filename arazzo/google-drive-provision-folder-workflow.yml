@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Google Drive Provision a Folder and Seed a File
+  summary: Create a folder, create a file inside it, and read the file back to confirm placement.
+  description: >-
+    The standard bootstrap flow for an integration that needs its own workspace
+    in a user's Drive. Folders in Drive are ordinary files with the
+    application/vnd.google-apps.folder MIME type, and nesting is expressed by
+    the parents array rather than by a path, so the folder must exist and its id
+    must be captured before any child can be created. This workflow creates the
+    folder, seeds a first file into it, and reads that file back to confirm the
+    parent binding actually took. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleDriveApi
+  url: ../openapi/google-drive-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-folder-and-seed-file
+  summary: Create a Drive folder and seed it with an initial file.
+  description: >-
+    Creates a folder (optionally nested under a parent folder), creates a file
+    whose parents array points at the new folder, and reads the file back to
+    verify it landed in the expected place.
+  inputs:
+    type: object
+    required:
+    - folderName
+    - fileName
+    - fileMimeType
+    properties:
+      folderName:
+        type: string
+        description: The name of the folder to create (e.g. "Acme Integration").
+      parentFolderId:
+        type: string
+        description: >-
+          Optional ID of an existing folder to nest the new folder under. Omit
+          to create the folder at the root of the user's Drive.
+      fileName:
+        type: string
+        description: The name of the first file to create inside the new folder.
+      fileMimeType:
+        type: string
+        description: >-
+          The MIME type of the seeded file (e.g.
+          application/vnd.google-apps.document).
+  steps:
+  - stepId: createFolder
+    description: >-
+      Create the folder by creating a file with the Drive folder MIME type. The
+      returned id is the handle every child file references via parents.
+    operationId: createFile
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.folderName
+        mimeType: application/vnd.google-apps.folder
+        parents:
+        - $inputs.parentFolderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      folderId: $response.body#/id
+      folderWebViewLink: $response.body#/webViewLink
+  - stepId: seedFile
+    description: >-
+      Create the initial file inside the folder created by the previous step by
+      pointing the parents array at that folder's id.
+    operationId: createFile
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.fileName
+        mimeType: $inputs.fileMimeType
+        parents:
+        - $steps.createFolder.outputs.folderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fileId: $response.body#/id
+      createdTime: $response.body#/createdTime
+  - stepId: confirmPlacement
+    description: >-
+      Read the seeded file back, explicitly selecting the parents field, to
+      confirm it was filed under the newly created folder rather than at the
+      Drive root.
+    operationId: getFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.seedFile.outputs.fileId
+    - name: fields
+      in: query
+      value: id,name,mimeType,parents,createdTime,webViewLink
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedFileId: $response.body#/id
+      confirmedParents: $response.body#/parents
+      fileWebViewLink: $response.body#/webViewLink
+  outputs:
+    folderId: $steps.createFolder.outputs.folderId
+    fileId: $steps.confirmPlacement.outputs.confirmedFileId
+    fileWebViewLink: $steps.confirmPlacement.outputs.fileWebViewLink

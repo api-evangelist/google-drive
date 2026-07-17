@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Google Drive Share a File and Audit Its Access
+  summary: Verify a file, audit who already has access, grant a new permission, and confirm the resulting access list.
+  description: >-
+    Sharing is the step most Drive integrations get wrong, because granting
+    access is fire-and-forget: the API happily records a new permission without
+    telling you who could already read the file, or whether the grant you just
+    made is the one that actually governs access. This workflow resolves the
+    file, captures the access list as it stood before the change, creates the
+    permission, and re-reads the access list so the caller ends with a verified
+    before-and-after picture of who can reach the document. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleDriveApi
+  url: ../openapi/google-drive-openapi.yml
+  type: openapi
+workflows:
+- workflowId: share-file-and-audit-access
+  summary: Grant a grantee access to a Drive file and verify the resulting permissions.
+  description: >-
+    Confirms the target file exists, snapshots its current permissions, creates
+    the requested permission, and reads the permissions back so the change can
+    be audited against the pre-change snapshot.
+  inputs:
+    type: object
+    required:
+    - fileId
+    - granteeType
+    - role
+    properties:
+      fileId:
+        type: string
+        description: The ID of the file to share.
+      granteeType:
+        type: string
+        description: The type of grantee — one of user, group, domain, or anyone.
+      role:
+        type: string
+        description: >-
+          The role to grant — one of owner, organizer, fileOrganizer, writer,
+          commenter, or reader.
+      emailAddress:
+        type: string
+        description: >-
+          The email address of the grantee. Required when granteeType is user or
+          group; omit for domain or anyone grants.
+      domain:
+        type: string
+        description: >-
+          The domain the permission applies to. Required when granteeType is
+          domain; omit otherwise.
+  steps:
+  - stepId: resolveFile
+    description: >-
+      Read the file's metadata to confirm it exists and is reachable by the
+      caller before any permission is written to it.
+    operationId: getFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $inputs.fileId
+    - name: fields
+      in: query
+      value: id,name,mimeType,trashed,webViewLink
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      resolvedFileId: $response.body#/id
+      fileName: $response.body#/name
+      webViewLink: $response.body#/webViewLink
+  - stepId: auditExistingAccess
+    description: >-
+      Snapshot the file's permissions before the change so the new grant can be
+      compared against who already had access.
+    operationId: listPermissions
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.resolveFile.outputs.resolvedFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      permissionsBefore: $response.body#/permissions
+  - stepId: grantAccess
+    description: >-
+      Create the requested permission on the file, granting the supplied role to
+      the supplied grantee.
+    operationId: createPermission
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.resolveFile.outputs.resolvedFileId
+    requestBody:
+      contentType: application/json
+      payload:
+        type: $inputs.granteeType
+        role: $inputs.role
+        emailAddress: $inputs.emailAddress
+        domain: $inputs.domain
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      permissionId: $response.body#/id
+      grantedRole: $response.body#/role
+  - stepId: confirmAccess
+    description: >-
+      Re-read the file's permissions so the caller can verify the new grant is
+      present and see the complete access list after the change.
+    operationId: listPermissions
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.resolveFile.outputs.resolvedFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      permissionsAfter: $response.body#/permissions
+  outputs:
+    fileName: $steps.resolveFile.outputs.fileName
+    webViewLink: $steps.resolveFile.outputs.webViewLink
+    permissionId: $steps.grantAccess.outputs.permissionId
+    permissionsBefore: $steps.auditExistingAccess.outputs.permissionsBefore
+    permissionsAfter: $steps.confirmAccess.outputs.permissionsAfter

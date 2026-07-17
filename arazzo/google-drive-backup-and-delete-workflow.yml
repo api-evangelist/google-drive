@@ -1,0 +1,125 @@
+arazzo: 1.0.1
+info:
+  title: Google Drive Back Up a File Before Permanently Deleting It
+  summary: Resolve a file, copy it into an archive folder, verify the backup exists, and only then permanently delete the original.
+  description: >-
+    Drive's delete endpoint permanently deletes the file without moving it to
+    the trash, which means there is no undo and no 30-day recovery window — the
+    usual safety net simply is not there. Any automated cleanup job therefore
+    has to create its own. This workflow resolves the target file, copies it
+    into an archive folder, reads that copy back to prove the backup actually
+    exists, and only then issues the irreversible delete. The ordering is the
+    whole point: the destructive step runs last and only after the backup has
+    been independently verified. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleDriveApi
+  url: ../openapi/google-drive-openapi.yml
+  type: openapi
+workflows:
+- workflowId: backup-and-delete-file
+  summary: Archive a copy of a file, verify it, then permanently delete the original.
+  description: >-
+    Reads the file's metadata, copies it into an archive folder under a
+    timestamped-style archive name, confirms the archived copy is readable, and
+    then permanently deletes the original file.
+  inputs:
+    type: object
+    required:
+    - fileId
+    - archiveFolderId
+    - archiveName
+    properties:
+      fileId:
+        type: string
+        description: The ID of the file to archive and then permanently delete.
+      archiveFolderId:
+        type: string
+        description: The ID of the folder the backup copy should be created in.
+      archiveName:
+        type: string
+        description: >-
+          The name to give the archived copy (e.g. "2026-07-17 - Q3 Report
+          (archived)").
+  steps:
+  - stepId: resolveFile
+    description: >-
+      Read the file's metadata to confirm it exists and capture its name and
+      size before anything destructive is attempted.
+    operationId: getFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $inputs.fileId
+    - name: fields
+      in: query
+      value: id,name,mimeType,size,parents,modifiedTime,trashed
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      resolvedFileId: $response.body#/id
+      originalName: $response.body#/name
+      originalMimeType: $response.body#/mimeType
+      originalSize: $response.body#/size
+  - stepId: archiveCopy
+    description: >-
+      Copy the file into the archive folder under the supplied archive name.
+      This copy is the only recoverable artifact once the original is deleted.
+    operationId: copyFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.resolveFile.outputs.resolvedFileId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.archiveName
+        parents:
+        - $inputs.archiveFolderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      archiveFileId: $response.body#/id
+  - stepId: verifyBackup
+    description: >-
+      Read the archived copy back and confirm it is present, untrashed, and
+      filed in the archive folder. This step is the gate on the delete — if the
+      backup cannot be read here, the original must not be destroyed.
+    operationId: getFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.archiveCopy.outputs.archiveFileId
+    - name: fields
+      in: query
+      value: id,name,mimeType,size,parents,trashed,webViewLink
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.trashed == false
+      type: jsonpath
+    outputs:
+      verifiedArchiveId: $response.body#/id
+      verifiedArchiveName: $response.body#/name
+      archiveWebViewLink: $response.body#/webViewLink
+  - stepId: deleteOriginal
+    description: >-
+      Permanently delete the original file. This bypasses the trash and cannot
+      be undone, which is why it runs only after the archived copy has been read
+      back successfully.
+    operationId: deleteFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.resolveFile.outputs.resolvedFileId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      deletedFileId: $steps.resolveFile.outputs.resolvedFileId
+  outputs:
+    originalName: $steps.resolveFile.outputs.originalName
+    deletedFileId: $steps.deleteOriginal.outputs.deletedFileId
+    archiveFileId: $steps.verifyBackup.outputs.verifiedArchiveId
+    archiveWebViewLink: $steps.verifyBackup.outputs.archiveWebViewLink

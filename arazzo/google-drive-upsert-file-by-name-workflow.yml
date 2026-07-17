@@ -1,0 +1,122 @@
+arazzo: 1.0.1
+info:
+  title: Google Drive Upsert a File by Name
+  summary: Find a file by name within a folder and update it if it exists, otherwise create it.
+  description: >-
+    The most common Google Drive integration pattern for systems that sync
+    records out to Drive. Drive allows many files to share the same name in the
+    same folder, so a naive create produces duplicates on every run. This
+    workflow searches the destination folder for a file matching the supplied
+    name, and then branches: when a match is found it patches the existing file
+    metadata, and when no match is found it creates a new file. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleDriveApi
+  url: ../openapi/google-drive-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upsert-file-by-name
+  summary: Upsert a single file into a Google Drive folder by its name.
+  description: >-
+    Looks for an existing non-trashed file with the given name inside the target
+    folder, and either updates the matched file or creates a new one, returning
+    the resulting file id either way.
+  inputs:
+    type: object
+    required:
+    - folderId
+    - fileName
+    - mimeType
+    properties:
+      folderId:
+        type: string
+        description: The ID of the folder to upsert the file into.
+      fileName:
+        type: string
+        description: The name of the file to match on and write (e.g. "Q3 Report").
+      mimeType:
+        type: string
+        description: >-
+          The MIME type of the file (e.g. application/vnd.google-apps.document).
+  steps:
+  - stepId: findFile
+    description: >-
+      Search the target folder for a non-trashed file whose name matches the
+      supplied file name, returning at most one match.
+    operationId: listFiles
+    parameters:
+    - name: q
+      in: query
+      value: "name = '$inputs.fileName' and '$inputs.folderId' in parents and trashed = false"
+    - name: pageSize
+      in: query
+      value: 1
+    - name: fields
+      in: query
+      value: files(id,name,mimeType,modifiedTime)
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedFileId: $response.body#/files/0/id
+    onSuccess:
+    - name: fileExists
+      type: goto
+      stepId: updateExisting
+      criteria:
+      - context: $response.body
+        condition: $.files.length > 0
+        type: jsonpath
+    - name: fileMissing
+      type: goto
+      stepId: createNew
+      criteria:
+      - context: $response.body
+        condition: $.files.length == 0
+        type: jsonpath
+  - stepId: updateExisting
+    description: >-
+      Patch the matched file's metadata with the supplied name and MIME type.
+      Only the fields provided are changed; the file's content, parents, and
+      sharing are left intact.
+    operationId: updateFile
+    parameters:
+    - name: fileId
+      in: path
+      value: $steps.findFile.outputs.matchedFileId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.fileName
+        mimeType: $inputs.mimeType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fileId: $response.body#/id
+      modifiedTime: $response.body#/modifiedTime
+      webViewLink: $response.body#/webViewLink
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createNew
+    description: >-
+      Create a new file in the target folder when no existing file matched the
+      supplied name.
+    operationId: createFile
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.fileName
+        mimeType: $inputs.mimeType
+        parents:
+        - $inputs.folderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fileId: $response.body#/id
+      createdTime: $response.body#/createdTime
+      webViewLink: $response.body#/webViewLink
+  outputs:
+    updatedFileId: $steps.updateExisting.outputs.fileId
+    createdFileId: $steps.createNew.outputs.fileId

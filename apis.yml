@@ -88,6 +88,21 @@ common:
     url: components/google-drive-components.yml
   - type: DataModel
     url: data-model/google-drive-data-model.yml
+  - type: Arazzo
+    url: arazzo/google-drive-upsert-file-by-name-workflow.yml
+    name: Google Drive Upsert a File by Name
+  - type: Arazzo
+    url: arazzo/google-drive-provision-folder-workflow.yml
+    name: Google Drive Provision a Folder and Seed a File
+  - type: Arazzo
+    url: arazzo/google-drive-share-file-workflow.yml
+    name: Google Drive Share a File and Audit Its Access
+  - type: Arazzo
+    url: arazzo/google-drive-copy-template-workflow.yml
+    name: Google Drive Copy a Template File into a Folder
+  - type: Arazzo
+    url: arazzo/google-drive-backup-and-delete-workflow.yml
+    name: Google Drive Back Up a File Before Permanently Deleting It
   - type: GitHubOrganization
     url: https://github.com/googleworkspace
   - type: Portal
