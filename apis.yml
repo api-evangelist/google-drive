@@ -4,7 +4,20 @@ description: >-
   The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and
   folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder
   hierarchies, sharing and permissions, and search across a user's Drive.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/google-drive.png
 url: https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/apis.yml
 created: '2024-01-15'
 modified: '2026-06-20'
@@ -19,40 +32,30 @@ tags:
   - Google
   - Storage
 apis:
-  - name: Google Drive API v3
-    description: >-
-      REST API for managing files and folders in Google Drive. Supports file metadata operations, content upload and
-      download, sharing and permissions, revisions, comments, and changes feeds.
-    image: https://www.gstatic.com/images/branding/product/2x/drive_48dp.png
-    humanURL: https://developers.google.com/drive/api/v3/about-sdk
-    baseURL: https://www.googleapis.com/drive/v3
-    tags:
-      - Cloud
-      - Collaboration
-      - Files
-      - Storage
-    properties:
-      - type: Documentation
-        url: https://developers.google.com/drive/api/v3/reference
-      - type: OpenAPI
-        url: openapi/google-drive-openapi.yml
-      - type: JSONSchema
-        url: json-schema/google-drive-file-schema.json
-      - type: Authentication
-        url: https://developers.google.com/drive/api/v3/about-auth
-      - type: GettingStarted
-        url: https://developers.google.com/drive/api/v3/quickstart/python
-      - type: Pricing
-        url: https://workspace.google.com/pricing
-      - type: TermsOfService
-        url: https://developers.google.com/terms
-      - type: OAuth Scopes
-        url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
-      - type: Overlay
-        url: overlays/google-drive-openapi-overlay.yaml
-    contact:
-      - type: Support
-        url: https://developers.google.com/drive/api/v3/support
+- aid: google-drive:google-drive-files-api
+  name: Google Drive Files API
+  description: The Files API from Google Drive — 4 operation(s) for files.
+  humanURL: https://developers.google.com/drive/api/v3/about-sdk
+  baseURL: https://www.googleapis.com/drive/v3
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/google-drive-files-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/drive/api/v3/reference
+  - type: JSONSchema
+    url: json-schema/google-drive-file-schema.json
+  - type: Authentication
+    url: https://developers.google.com/drive/api/v3/about-auth
+  - type: GettingStarted
+    url: https://developers.google.com/drive/api/v3/quickstart/python
+  - type: Pricing
+    url: https://workspace.google.com/pricing
+  - type: TermsOfService
+    url: https://developers.google.com/terms
+  - type: OAuth Scopes
+    url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
 common:
   - type: AgenticAccess
     url: agentic-access/google-drive-agentic-access.yml
