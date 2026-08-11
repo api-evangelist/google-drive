@@ -57,6 +57,8 @@ apis:
   - type: OAuth Scopes
     url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
 common:
+  - type: Overlay
+    url: overlays/google-drive-openapi-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/google-drive-agentic-access.yml
   - type: VulnerabilityDisclosure
