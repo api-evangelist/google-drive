@@ -2,13 +2,11 @@ generated: '2026-06-20'
 method: searched
 status: published
 source: https://developers.google.com/workspace/drive/api/reference/mcp
-description: >-
-  Google operates an official remote Model Context Protocol server for Google
-  Drive (Developer Preview). It acts as a proxy that lets AI applications (e.g.
-  Google Antigravity, Claude) read and act on Drive data while inheriting the
-  user's Drive permissions and data-governance controls. Authenticated with
-  OAuth 2.0; must be enabled in a Google Cloud project. Tool list captured
-  verbatim from the official MCP reference.
+description: Google operates an official remote Model Context Protocol server for Google Drive (Developer
+  Preview). It acts as a proxy that lets AI applications (e.g. Google Antigravity, Claude) read and act
+  on Drive data while inheriting the user's Drive permissions and data-governance controls. Authenticated
+  with OAuth 2.0; must be enabled in a Google Cloud project. Tool list captured verbatim from the official
+  MCP reference.
 server:
   name: google-drive
   transport: http
@@ -18,19 +16,27 @@ server:
   status: developer-preview
   setup: https://developers.google.com/workspace/drive/api/guides/configure-mcp-server
 tools:
-  - name: search_files
-    description: Locate files using Drive search queries.
-  - name: list_recent_files
-    description: Display recently accessed or modified files.
-  - name: get_file_metadata
-    description: Retrieve file information and properties.
-  - name: get_file_permissions
-    description: Access a file's sharing and permission details.
-  - name: read_file_content
-    description: Read and return file contents.
-  - name: download_file_content
-    description: Retrieve file contents for download.
-  - name: create_file
-    description: Create a new file in Google Drive.
-  - name: copy_file
-    description: Duplicate a file in Google Drive (customizable title and parent).
+- name: search_files
+  description: Locate files using Drive search queries.
+- name: list_recent_files
+  description: Display recently accessed or modified files.
+- name: get_file_metadata
+  description: Retrieve file information and properties.
+- name: get_file_permissions
+  description: Access a file's sharing and permission details.
+- name: read_file_content
+  description: Read and return file contents.
+- name: download_file_content
+  description: Retrieve file contents for download.
+- name: create_file
+  description: Create a new file in Google Drive.
+- name: copy_file
+  description: Duplicate a file in Google Drive (customizable title and parent).
+deployment:
+  mode: remote
+  endpoint: https://drivemcp.googleapis.com/mcp/v1
+  verified: probed
+  probe: live
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census
