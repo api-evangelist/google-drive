@@ -26,6 +26,14 @@ type: Index
 tags:
   - Cloud Storage
   - Collaboration
+  - Document-Management
+  - Drives
+  - File
+  - Google
+  - Storage
+tags_raw:
+  - Cloud Storage
+  - Collaboration
   - Document Management
   - Drive
   - Files
@@ -38,6 +46,8 @@ apis:
   humanURL: https://developers.google.com/drive/api/v3/about-sdk
   baseURL: https://www.googleapis.com/drive/v3
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
