@@ -13,8 +13,8 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleDriveApi
-  url: ../openapi/google-drive-openapi.yml
+- name: filesApi
+  url: ../openapi/google-drive-files-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upsert-file-by-name
