@@ -4,6 +4,18 @@ description: >-
   The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and
   folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder
   hierarchies, sharing and permissions, and search across a user's Drive.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
