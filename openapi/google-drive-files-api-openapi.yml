@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Google Drive Files API
   description: The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder hierarchies, sharing and permissions, and search across a user's Drive.
@@ -270,18 +270,6 @@ components:
         webViewLink:
           type: string
           description: A link for opening the file in the relevant Google editor or viewer.
-    FileList:
-      type: object
-      description: A list of files returned from the files.list endpoint.
-      properties:
-        nextPageToken:
-          type: string
-          description: Token to retrieve the next page of results.
-        files:
-          type: array
-          description: The list of files.
-          items:
-            $ref: '#/components/schemas/File'
     PermissionList:
       type: object
       description: A list of permissions for a file or shared drive.
@@ -294,3 +282,15 @@ components:
           description: The list of permissions.
           items:
             $ref: '#/components/schemas/Permission'
+    FileList:
+      type: object
+      description: A list of files returned from the files.list endpoint.
+      properties:
+        nextPageToken:
+          type: string
+          description: Token to retrieve the next page of results.
+        files:
+          type: array
+          description: The list of files.
+          items:
+            $ref: '#/components/schemas/File'
