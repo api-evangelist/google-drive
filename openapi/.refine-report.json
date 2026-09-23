@@ -1,7 +1,7 @@
 {
   "provider": "google-drive",
   "sources": [
-    "google-drive-files-api-openapi.yml"
+    "_original/google-drive-openapi.yml"
   ],
   "outputs": [
     "google-drive-files-api-openapi.yml"
@@ -10,8 +10,20 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "google-drive-files-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "google-drive-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "google-drive-openapi.yml: tagged paths GET /files -> Files",
+    "google-drive-openapi.yml: tagged paths POST /files -> Files",
+    "google-drive-openapi.yml: tagged paths GET /files/{fileId} -> Files",
+    "google-drive-openapi.yml: tagged paths PATCH /files/{fileId} -> Files",
+    "google-drive-openapi.yml: tagged paths DELETE /files/{fileId} -> Files",
+    "google-drive-openapi.yml: tagged paths POST /files/{fileId}/copy -> Files",
+    "google-drive-openapi.yml: tagged paths GET /files/{fileId}/permissions -> Files",
+    "google-drive-openapi.yml: tagged paths POST /files/{fileId}/permissions -> Files",
+    "google-drive-openapi.yml: declared missing tag: Files",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "google-drive-files-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
