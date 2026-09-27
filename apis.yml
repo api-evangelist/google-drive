@@ -38,7 +38,7 @@ type: Index
 tags:
   - Cloud Storage
   - Collaboration
-  - Document-Management
+  - Document Management
   - Drives
   - File
   - Google
@@ -51,6 +51,7 @@ tags_raw:
   - Files
   - Google
   - Storage
+  - Document-Management
 apis:
 - aid: google-drive:google-drive-files-api
   name: Google Drive Files API
