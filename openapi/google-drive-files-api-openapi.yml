@@ -216,18 +216,6 @@ paths:
       - Files
 components:
   schemas:
-    PermissionList:
-      type: object
-      description: A list of permissions for a file or shared drive.
-      properties:
-        nextPageToken:
-          type: string
-          description: Token to retrieve the next page of results.
-        permissions:
-          type: array
-          description: The list of permissions.
-          items:
-            $ref: '#/components/schemas/Permission'
     FileList:
       type: object
       description: A list of files returned from the files.list endpoint.
@@ -259,6 +247,18 @@ components:
         domain:
           type: string
           description: The domain to which the permission applies, if applicable.
+    PermissionList:
+      type: object
+      description: A list of permissions for a file or shared drive.
+      properties:
+        nextPageToken:
+          type: string
+          description: Token to retrieve the next page of results.
+        permissions:
+          type: array
+          description: The list of permissions.
+          items:
+            $ref: '#/components/schemas/Permission'
     File:
       type: object
       description: A file resource representing a file or folder in Google Drive.
