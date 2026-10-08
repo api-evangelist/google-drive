@@ -80,6 +80,10 @@ apis:
   - type: OAuth Scopes
     url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
 common:
+  - type: Plans
+    url: plans/google-drive-plans-pricing.yml
+  - type: FinOps
+    url: finops/google-drive-finops.yml
   - type: Website
     url: https://www.google.com/
   - type: Overlay
