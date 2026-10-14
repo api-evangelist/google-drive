@@ -213,7 +213,6 @@
   arazzo: null
 - slug: google-drive-facebook-pages
   label: Facebook Pages
-  partner: facebook-pages
   partner_name: Facebook Pages
   category: Facebook
   type: marketplace
@@ -221,7 +220,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/google-drive/integrations/facebook-pages
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: google-drive-hubspot
   label: HubSpot
@@ -273,7 +272,6 @@
   arazzo: null
 - slug: google-drive-monday-com
   label: monday.com
-  partner: monday-com
   partner_name: monday.com
   category: Project Management
   type: marketplace
@@ -281,7 +279,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/google-drive/integrations/monday
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: google-drive-google-sheets
   label: Google Sheets
@@ -441,5 +439,17 @@
     property: schemas.Contacts.ContactFile.source
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
+  status: not-a-workflow
+  arazzo: null
+- slug: google-drive-hightouch
+  label: Hightouch
+  partner: hightouch
+  partner_name: Hightouch
+  type: coverage
+  marketplace: coverage
+  channel: partner-built
+  evidence: https://hightouch.com/docs/destinations/google-drive
+  source: edge
+  relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
