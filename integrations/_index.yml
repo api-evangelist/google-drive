@@ -563,7 +563,7 @@
       type: source
       lapsed: false
       cloud: true
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: google-drive-fivetran
   label: Fivetran
@@ -589,5 +589,5 @@
     - connectors/files/google-drive
     vendor_link: https://www.google.com/drive/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
