@@ -40,3 +40,32 @@ deployment:
   tools: 8
   checked: '2026-08-12'
   source: catalog MCP census
+tool_quality:
+  tool_count: 8
+  tokens_total: 7929
+  tokens_per_tool_median: 1054
+  heavy_tools:
+  - name: search_files
+    tokens: 1522
+  - name: create_file
+    tokens: 1329
+  heavy_tool_count: 2
+  params_total: 31
+  params_undescribed: 0
+  params_described_pct: 100.0
+  tools_with_undescribed_params: 0
+  tools_annotated: 8
+  annotated_pct: 100.0
+  state_changing_unhinted: []
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 7
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/google-drive-mcp-tools.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.
