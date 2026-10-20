@@ -16,22 +16,97 @@ server:
   status: developer-preview
   setup: https://developers.google.com/workspace/drive/api/guides/configure-mcp-server
 tools:
-- name: search_files
-  description: Locate files using Drive search queries.
-- name: list_recent_files
-  description: Display recently accessed or modified files.
-- name: get_file_metadata
-  description: Retrieve file information and properties.
-- name: get_file_permissions
-  description: Access a file's sharing and permission details.
-- name: read_file_content
-  description: Read and return file contents.
-- name: download_file_content
-  description: Retrieve file contents for download.
-- name: create_file
-  description: Create a new file in Google Drive.
 - name: copy_file
-  description: Duplicate a file in Google Drive (customizable title and parent).
+  description: 'Call this tool to copy an existing File in Google Drive.
+
+    The tool allows specifying a new title and a parent folder for the copy.
+
+    If the title is not specified, the copy title will be ''Copy of {original title}''.
+
+    If the parent folder is not specified, the copy will be created in the same folder as the original
+    file, unless the requesting user does not have write access to that folder, in which case the copy
+    will be created in the user''s root folder.Returns the newly created File object upon successful copying.'
+- name: create_file
+  description: "Call this tool to create or upload a File to Google Drive.\n\nIf uploading content, prefer\
+    \ `textContent` for text content. For non-UTF8 contents, use the `base64Content` field and base64\
+    \ encode the data to set on that field.\n\nReturns a single File object upon successful creation.\n\
+    \nThe following Google first-party mime types can be created without providing content:\n\n - `application/vnd.google-apps.document`\
+    \ \n - `application/vnd.google-apps.spreadsheet` \n - `application/vnd.google-apps.presentation` \n\
+    \nFolders can be created by setting the mime type to `application/vnd.google-apps.folder`.\n\nWhen\
+    \ uploading content, the `contentMimeType` field is required and should match the type of the content\
+    \ being uploaded.\n\nBy default, supported content will be converted to Google first-party mime types.\n\
+    \nTo disable conversions for first-party mime types, set `disableConversionToGoogleType` to true."
+- name: download_file_content
+  description: 'Call this tool to download the content of a Drive file as a base64 encoded string.
+
+
+    If the file is a Google Drive first-party mime type, the `exportMimeType` field specifies the desired
+    export mime type. When the field is unset, defaults to plain text types (e.g. `text/plain`, `text/csv`).
+
+
+    If the file is not found, try using other tools like `search_files` to find the file the user is requesting.
+
+
+    If the user wants a natural language representation of their Drive content, use the `read_file_content`
+    tool (`read_file_content` should be smaller and easier to parse).'
+- name: get_file_metadata
+  description: 'Call this tool to find general metadata about a user''s Drive file.
+
+
+    Context window token management can be tuned via `snippetVerbosity` (default is `SnippetVerbosity.DETAILED`)
+    or if only metadata is needed, use `excludeContentSnippets`.
+
+
+    If the file is not found, try using other tools like `search_files` to find the file the user is requesting.'
+- name: get_file_permissions
+  description: Call this tool to list the permissions of a Drive File.
+- name: list_recent_files
+  description: "Call this tool to find recent files for a user specified a sort order. Default sort order\
+    \ is `recency` if orderBy is not set or set to an unsupported value.\n\nContext window token management\
+    \ can be tuned via `snippetVerbosity` (default is `SnippetVerbosity.DETAILED`) or if only metadata\
+    \ is needed, use `excludeContentSnippets`.\n\nSupported sort orders are:\n\n - `recency`: The most\
+    \ recent timestamp from the file's date-time fields.\n - `lastModified`: The last time the file was\
+    \ modified by anyone.\n - `lastModifiedByMe`: The last time the file was modified by the user.\n\n\
+    The default page size is 10. Utilize `next_page_token` to paginate through the results."
+- name: read_file_content
+  description: "Call this tool to fetch a natural language representation of a known Drive file, and if\
+    \ specified, its comments.\n\nREQUIREMENTS & WORKFLOW:\n - `fileId` is required. You MUST pass an\
+    \ exact Drive file ID returned by a previous discovery tool (`search_files` or `list_recent_files`)\
+    \ or provided explicitly in the user prompt.\n - NEVER guess, invent, or hallucinate a `fileId` string\
+    \ from a file title or name.\n - If given a file title, name, or topic without an explicit `fileId`,\
+    \ you MUST FIRST call `search_files` to find the file and retrieve its `fileId` before invoking this\
+    \ tool.\n\nThe file content may be incomplete for very large files. The text representation will change\
+    \ over time, so don't make assumptions about the particular format of the text returned by this tool.\
+    \ If supported and specified, comment tags will be included in the content.\n\nSupported Mime Types:\n\
+    \n - `application/vnd.google-apps.document` (supports comments)\n - `application/vnd.google-apps.presentation`\
+    \ (supports comments)\n - `application/vnd.google-apps.spreadsheet` (supports comments)\n - `application/pdf`\
+    \ \n - `application/msword` \n - `application/vnd.openxmlformats-officedocument.wordprocessingml.document`\
+    \ \n - `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` \n - `application/vnd.openxmlformats-officedocument.presentationml.presentation`\
+    \ \n - `application/vnd.oasis.opendocument.spreadsheet` \n - `application/vnd.oasis.opendocument.presentation`\
+    \ \n - `application/x-vnd.oasis.opendocument.text` \n - `image/png` \n - `image/jpeg` \n - `image/jpg`\
+    \ \n\nIf the file is not found, try using other tools like `search_files` to find the file the user\
+    \ is requesting using keywords."
+- name: search_files
+  description: "Search for Drive files using a structured query (syntax: `query_term operator values`).\
+    \ Only terms in this list are supported.\nCombine clauses with `and`, `or`, `not`, and parentheses.\
+    \ String values must be single-quoted; escape embedded quotes as `\\'`.\nContext window token management\
+    \ can be tuned via `snippetVerbosity` (default is `SnippetVerbosity.DETAILED`) or if only metadata\
+    \ is needed, use `excludeContentSnippets`.\n\nDo NOT include document type terms (e.g., 'presentation',\
+    \ 'slides', 'deck', 'document', 'doc', 'spreadsheet', 'sheet', 'pdf', 'folder') inside `title contains\
+    \ '...'` or `fullText contains '...'` clauses. Separate title keywords from file type terms. Instead\
+    \ map them to `mimeType` clauses in the query (e.g., 'slides' -> `mimeType = 'application/vnd.google-apps.presentation'`).\n\
+    \nQuery terms & operators:\n\n - `title` (ops: contains, =, !=) — file title\n - `fullText` (ops:\
+    \ contains) — title or body text\n - `mimeType` (ops: contains, =, !=) — MIME type\n - `modifiedTime`,\
+    \ `viewedByMeTime`, `createdTime` (ops: `<=`, `<`, `=`, `!=`, `>`, `>=`). Use RFC 3339 UTC, e.g.,\
+    \ `2012-06-04T12:00:00-08:00`. Date types not comparable.\n - `parentId` (ops: `=`, `!=`). Use `'root'`\
+    \ for the user's \"My Drive\".\n - `owner` (ops: `=`, `!=`). Use `'me'` for the requesting user.\n\
+    \ - `sharedWithMe` (ops: `=`, `!=`). Values: `true` or `false`.\n - `starred` (ops: `=`, `!=`). Values:\
+    \ `true` or `false`.\n\nOther operators: `and`, `or`, `not`.\n\nExamples:\n\n - `title contains 'hello'\
+    \ and title contains 'goodbye'`\n - `modifiedTime > '2024-01-01T00:00:00Z' and (mimeType contains\
+    \ 'image/' or mimeType contains 'video/')`\n - `parentId = '1234567'`\n - `fullText contains 'hello'`\n\
+    \ - `owner = 'test@example.org'`\n - `sharedWithMe = true`\n - `starred = true`\n - `owner = 'me'`\
+    \ (for files owned by the user)\n\nUse `next_page_token` to paginate. Duplicate results can occur\
+    \ across page boundaries. An empty response means no more results."
 deployment:
   mode: remote
   endpoint: https://drivemcp.googleapis.com/mcp/v1
@@ -69,3 +144,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 8
