@@ -80,6 +80,8 @@ apis:
   - type: OAuth Scopes
     url: https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/google-drive/overview
   - type: Plans
     url: plans/google-drive-plans-pricing.yml
   - type: FinOps
