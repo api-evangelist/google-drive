@@ -1,832 +1,851 @@
 {
+  "info": {
+    "_postman_id": "4f5df6b6-2298-4d7b-b554-610ef04efad1",
+    "name": "Google Drive Files API",
+    "description": "The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder hierarchies, sharing and permissions, and search across a user's Drive.\n\nContact Support:\n Name: Google",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:18:03.000Z",
+    "updatedAt": "2026-10-21T21:18:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4f5df6b6-2298-4d7b-b554-610ef04efad1"
+  },
   "item": [
     {
-      "id": "8726361f-7160-4ba3-a1a8-dbc81b27ad9d",
-      "name": "Files",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "files",
       "item": [
         {
-          "id": "7f576c4d-f602-4067-b4bd-fa65cd6b47ee",
-          "name": "List files",
-          "request": {
-            "name": "List files",
-            "description": {
-              "content": "Lists the user's files. Supports query parameters for filtering, ordering, paging, and selecting fields to return.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{fileId}",
+          "item": [
+            {
+              "name": "copy",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "q",
-                  "value": "<string>",
-                  "description": "Query string for searching files."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageSize",
-                  "value": "100",
-                  "description": "Maximum number of files to return per page."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageToken",
-                  "value": "<string>",
-                  "description": "Token for continuing a previous list request."
-                },
-                {
-                  "disabled": false,
-                  "key": "fields",
-                  "value": "<string>",
-                  "description": "Selector specifying which fields to include in a response."
+                  "name": "Copy a file",
+                  "id": "61ae2cd0-82ec-45eb-9199-9e4fbd64eac0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileId/copy",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileId",
+                        "copy"
+                      ],
+                      "variable": [
+                        {
+                          "id": "30d39163-b921-46a5-8be7-0634a1fce3c9",
+                          "key": "fileId",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the file to copy."
+                        }
+                      ]
+                    },
+                    "description": "Creates a copy of a file and applies any requested updates with patch semantics."
+                  },
+                  "response": [
+                    {
+                      "id": "8fbeba91-a433-4b6f-8006-272aea516627",
+                      "name": "The metadata of the copied file.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/files/:fileId/copy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "files",
+                            ":fileId",
+                            "copy"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fileId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T21:18:04.000Z",
+                      "updatedAt": "2026-10-21T21:18:04.000Z",
+                      "uid": "35240-8fbeba91-a433-4b6f-8006-272aea516627"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T21:18:04.000Z",
+                  "updatedAt": "2026-10-21T21:18:04.000Z",
+                  "uid": "35240-61ae2cd0-82ec-45eb-9199-9e4fbd64eac0"
                 }
               ],
-              "variable": []
+              "id": "8efef123-9444-482f-91e0-0033762ccabb",
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-8efef123-9444-482f-91e0-0033762ccabb"
             },
+            {
+              "name": "permissions",
+              "item": [
+                {
+                  "name": "List permissions",
+                  "id": "53fb0df6-b76e-4dc0-a681-65776a4e6a57",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileId/permissions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileId",
+                        "permissions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "bec21def-d8f9-4929-9d9d-24b875103658",
+                          "key": "fileId",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the file."
+                        }
+                      ]
+                    },
+                    "description": "Lists a file's or shared drive's permissions."
+                  },
+                  "response": [
+                    {
+                      "id": "11af97a1-f9ad-463c-92eb-854d6661012e",
+                      "name": "List of permissions.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/files/:fileId/permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "files",
+                            ":fileId",
+                            "permissions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fileId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"nextPageToken\": \"<string>\",\n  \"permissions\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"role\": \"<string>\",\n      \"emailAddress\": \"<string>\",\n      \"domain\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"role\": \"<string>\",\n      \"emailAddress\": \"<string>\",\n      \"domain\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T21:18:04.000Z",
+                      "updatedAt": "2026-10-21T21:18:04.000Z",
+                      "uid": "35240-11af97a1-f9ad-463c-92eb-854d6661012e"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T21:18:04.000Z",
+                  "updatedAt": "2026-10-21T21:18:04.000Z",
+                  "uid": "35240-53fb0df6-b76e-4dc0-a681-65776a4e6a57"
+                },
+                {
+                  "name": "Create a permission",
+                  "id": "98a5f5ca-9445-4b77-9d86-f76d96be03a5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"role\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"domain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileId/permissions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileId",
+                        "permissions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2d20a042-ef2c-431e-939c-bcb1e06922dd",
+                          "key": "fileId",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the file."
+                        }
+                      ]
+                    },
+                    "description": "Creates a permission for a file or shared drive."
+                  },
+                  "response": [
+                    {
+                      "id": "3db16e2c-93c3-4d93-b3fe-bf06286a8d11",
+                      "name": "The created permission.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"role\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"domain\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/files/:fileId/permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "files",
+                            ":fileId",
+                            "permissions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fileId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"role\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"domain\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T21:18:04.000Z",
+                      "updatedAt": "2026-10-21T21:18:04.000Z",
+                      "uid": "35240-3db16e2c-93c3-4d93-b3fe-bf06286a8d11"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T21:18:04.000Z",
+                  "updatedAt": "2026-10-21T21:18:04.000Z",
+                  "uid": "35240-98a5f5ca-9445-4b77-9d86-f76d96be03a5"
+                }
+              ],
+              "id": "93486e7f-2161-41fc-bc72-e961b2c88694",
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-93486e7f-2161-41fc-bc72-e961b2c88694"
+            },
+            {
+              "name": "Get a file",
+              "id": "b43bd27f-712c-49fb-b6b9-7e3efd807089",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:fileId?fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Selector specifying which fields to include in a response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "7764d35c-8670-4fdc-9a2d-0b8c728b0404",
+                      "key": "fileId",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the file."
+                    }
+                  ]
+                },
+                "description": "Gets a file's metadata or content by ID."
+              },
+              "response": [
+                {
+                  "id": "67e8d02b-a31a-48c4-bdfb-0748b55e6e83",
+                  "name": "The file metadata.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileId?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Selector specifying which fields to include in a response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:04.000Z",
+                  "updatedAt": "2026-10-21T21:18:04.000Z",
+                  "uid": "35240-67e8d02b-a31a-48c4-bdfb-0748b55e6e83"
+                }
+              ],
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-b43bd27f-712c-49fb-b6b9-7e3efd807089"
+            },
+            {
+              "name": "Update a file",
+              "id": "be0f85a2-f730-4ba8-8d94-e7c4e23c2485",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/files/:fileId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0a598fd3-2a00-4834-a133-a82313275ab4",
+                      "key": "fileId",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the file."
+                    }
+                  ]
+                },
+                "description": "Updates a file's metadata and/or content."
+              },
+              "response": [
+                {
+                  "id": "2d7ebf5e-161b-41f1-819f-ca8f62cb28b5",
+                  "name": "The updated file metadata.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:04.000Z",
+                  "updatedAt": "2026-10-21T21:18:04.000Z",
+                  "uid": "35240-2d7ebf5e-161b-41f1-819f-ca8f62cb28b5"
+                }
+              ],
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-be0f85a2-f730-4ba8-8d94-e7c4e23c2485"
+            },
+            {
+              "name": "Delete a file",
+              "id": "826d26a9-f311-4998-bda6-19f3a60d35a1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:fileId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dbb38579-babc-4eda-9647-07f38b64b6fe",
+                      "key": "fileId",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the file."
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a file owned by the user without moving it to the trash."
+              },
+              "response": [
+                {
+                  "id": "16c31619-c7cf-49b1-ab59-10334da5532e",
+                  "name": "File deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:18:04.000Z",
+                  "updatedAt": "2026-10-21T21:18:04.000Z",
+                  "uid": "35240-16c31619-c7cf-49b1-ab59-10334da5532e"
+                }
+              ],
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-826d26a9-f311-4998-bda6-19f3a60d35a1"
+            }
+          ],
+          "id": "84e19536-d16c-4f04-a010-9061fa578a32",
+          "createdAt": "2026-10-21T21:18:04.000Z",
+          "updatedAt": "2026-10-21T21:18:04.000Z",
+          "uid": "35240-84e19536-d16c-4f04-a010-9061fa578a32"
+        },
+        {
+          "name": "List files",
+          "id": "0b1bee0e-dea5-4eec-bba4-50bcdb2e35ee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/files?q=<string>&pageSize=100&pageToken=<string>&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "files"
+              ],
+              "query": [
+                {
+                  "description": "Query string for searching files.",
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of files to return per page.",
+                  "key": "pageSize",
+                  "value": "100"
+                },
+                {
+                  "description": "Token for continuing a previous list request.",
+                  "key": "pageToken",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Selector specifying which fields to include in a response.",
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Lists the user's files. Supports query parameters for filtering, ordering, paging, and selecting fields to return."
           },
           "response": [
             {
-              "id": "e20f4e3a-041e-4c8c-a9da-9de14cf6286c",
+              "id": "471c04bf-7a03-4429-a3c5-637a35636b51",
               "name": "Successful response containing a list of files.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "files"
-                  ],
+                  "raw": "{{baseUrl}}/files?q=<string>&pageSize=100&pageToken=<string>&fields=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "files"
+                  ],
                   "query": [
                     {
+                      "description": "Query string for searching files.",
                       "key": "q",
                       "value": "<string>"
                     },
                     {
+                      "description": "Maximum number of files to return per page.",
                       "key": "pageSize",
                       "value": "100"
                     },
                     {
+                      "description": "Token for continuing a previous list request.",
                       "key": "pageToken",
                       "value": "<string>"
                     },
                     {
+                      "description": "Selector specifying which fields to include in a response.",
                       "key": "fields",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"nextPageToken\": \"string\",\n  \"files\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"mimeType\": \"string\",\n      \"parents\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdTime\": \"1947-06-15T10:16:24.767Z\",\n      \"modifiedTime\": \"2020-02-20T14:34:34.654Z\",\n      \"size\": \"string\",\n      \"trashed\": true,\n      \"webViewLink\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"mimeType\": \"string\",\n      \"parents\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdTime\": \"1988-11-03T13:31:46.375Z\",\n      \"modifiedTime\": \"1968-01-19T08:32:07.850Z\",\n      \"size\": \"string\",\n      \"trashed\": true,\n      \"webViewLink\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"nextPageToken\": \"<string>\",\n  \"files\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"parents\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdTime\": \"<dateTime>\",\n      \"modifiedTime\": \"<dateTime>\",\n      \"size\": \"<string>\",\n      \"trashed\": \"<boolean>\",\n      \"webViewLink\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"parents\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdTime\": \"<dateTime>\",\n      \"modifiedTime\": \"<dateTime>\",\n      \"size\": \"<string>\",\n      \"trashed\": \"<boolean>\",\n      \"webViewLink\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-471c04bf-7a03-4429-a3c5-637a35636b51"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:18:04.000Z",
+          "updatedAt": "2026-10-21T21:18:04.000Z",
+          "uid": "35240-0b1bee0e-dea5-4eec-bba4-50bcdb2e35ee"
         },
         {
-          "id": "4f794f47-8bfa-4908-b9a9-e8eb0c5bcc53",
           "name": "Create a file",
+          "id": "9efc2a62-6904-4456-9873-83c299d56e82",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create a file",
-            "description": {
-              "content": "Creates a new file in Google Drive. For uploading file content use the upload endpoint; this endpoint creates metadata-only files such as folders or shortcuts.",
-              "type": "text/plain"
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
             },
             "url": {
+              "raw": "{{baseUrl}}/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "files"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
+            "description": "Creates a new file in Google Drive. For uploading file content use the upload endpoint; this endpoint creates metadata-only files such as folders or shortcuts."
           },
           "response": [
             {
-              "id": "ee7c919e-772c-4df7-b881-b9d113187162",
+              "id": "38ee8330-bdda-4fe7-bbf1-d286525e9cba",
               "name": "The created file metadata.",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/files",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"mimeType\": \"string\",\n  \"parents\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdTime\": \"1948-01-06T11:28:32.845Z\",\n  \"modifiedTime\": \"1984-06-25T22:30:26.912Z\",\n  \"size\": \"string\",\n  \"trashed\": true,\n  \"webViewLink\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:04.000Z",
+              "updatedAt": "2026-10-21T21:18:04.000Z",
+              "uid": "35240-38ee8330-bdda-4fe7-bbf1-d286525e9cba"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c040abc7-ef0f-44c9-83bb-bd9b88790d03",
-          "name": "Get a file",
-          "request": {
-            "name": "Get a file",
-            "description": {
-              "content": "Gets a file's metadata or content by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files",
-                ":fileId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "fields",
-                  "value": "<string>",
-                  "description": "Selector specifying which fields to include in a response."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fileId",
-                  "description": "(Required) The ID of the file."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ca07f4ed-e0f6-44da-b6e6-58d36961cdf4",
-              "name": "The file metadata.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "files",
-                    ":fileId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "fields",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fileId",
-                      "description": "(Required) The ID of the file."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"mimeType\": \"string\",\n  \"parents\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdTime\": \"1948-01-06T11:28:32.845Z\",\n  \"modifiedTime\": \"1984-06-25T22:30:26.912Z\",\n  \"size\": \"string\",\n  \"trashed\": true,\n  \"webViewLink\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a459a460-d308-4541-93fc-6d12b410fc4a",
-          "name": "Update a file",
-          "request": {
-            "name": "Update a file",
-            "description": {
-              "content": "Updates a file's metadata and/or content.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files",
-                ":fileId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fileId",
-                  "description": "(Required) The ID of the file."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f4a2637c-4750-4271-a57f-355aee8d2828",
-              "name": "The updated file metadata.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "files",
-                    ":fileId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fileId",
-                      "description": "(Required) The ID of the file."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"mimeType\": \"string\",\n  \"parents\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdTime\": \"1948-01-06T11:28:32.845Z\",\n  \"modifiedTime\": \"1984-06-25T22:30:26.912Z\",\n  \"size\": \"string\",\n  \"trashed\": true,\n  \"webViewLink\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3a283a8d-98c2-406f-8908-22061d5451b0",
-          "name": "Delete a file",
-          "request": {
-            "name": "Delete a file",
-            "description": {
-              "content": "Permanently deletes a file owned by the user without moving it to the trash.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files",
-                ":fileId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fileId",
-                  "description": "(Required) The ID of the file."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c95f35d7-6b77-4401-9945-ab7d47ef6281",
-              "name": "File deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "files",
-                    ":fileId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fileId",
-                      "description": "(Required) The ID of the file."
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9e0b73c9-9137-4f9c-9319-c9d8492bfcc0",
-          "name": "Copy a file",
-          "request": {
-            "name": "Copy a file",
-            "description": {
-              "content": "Creates a copy of a file and applies any requested updates with patch semantics.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files",
-                ":fileId",
-                "copy"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fileId",
-                  "description": "(Required) The ID of the file to copy."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "fe88177d-30f9-4cb5-b6b2-82c83dba8ad1",
-              "name": "The metadata of the copied file.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "files",
-                    ":fileId",
-                    "copy"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fileId",
-                      "description": "(Required) The ID of the file to copy."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"parents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"trashed\": \"<boolean>\",\n  \"webViewLink\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"mimeType\": \"string\",\n  \"parents\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdTime\": \"1948-01-06T11:28:32.845Z\",\n  \"modifiedTime\": \"1984-06-25T22:30:26.912Z\",\n  \"size\": \"string\",\n  \"trashed\": true,\n  \"webViewLink\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "260ac756-5b5e-4a9f-a348-ddcd9fbd6325",
-          "name": "List permissions",
-          "request": {
-            "name": "List permissions",
-            "description": {
-              "content": "Lists a file's or shared drive's permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files",
-                ":fileId",
-                "permissions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fileId",
-                  "description": "(Required) The ID of the file."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "51ca206f-1ee0-4525-a795-d0e36f516ffb",
-              "name": "List of permissions.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "files",
-                    ":fileId",
-                    "permissions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fileId",
-                      "description": "(Required) The ID of the file."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"nextPageToken\": \"string\",\n  \"permissions\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"role\": \"string\",\n      \"emailAddress\": \"string\",\n      \"domain\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"role\": \"string\",\n      \"emailAddress\": \"string\",\n      \"domain\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3857f98c-2e3c-4829-a12d-93b07e63dc4b",
-          "name": "Create a permission",
-          "request": {
-            "name": "Create a permission",
-            "description": {
-              "content": "Creates a permission for a file or shared drive.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "files",
-                ":fileId",
-                "permissions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fileId",
-                  "description": "(Required) The ID of the file."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"role\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"domain\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "2609ccae-cacc-4c3c-a51c-6c1f4b0840fd",
-              "name": "The created permission.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "files",
-                    ":fileId",
-                    "permissions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fileId",
-                      "description": "(Required) The ID of the file."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"role\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"domain\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"role\": \"string\",\n  \"emailAddress\": \"string\",\n  \"domain\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:18:04.000Z",
+          "updatedAt": "2026-10-21T21:18:04.000Z",
+          "uid": "35240-9efc2a62-6904-4456-9873-83c299d56e82"
         }
       ],
-      "event": []
+      "id": "c66de5e8-3c26-4d5b-a1a2-42cf7be3859b",
+      "createdAt": "2026-10-21T21:18:04.000Z",
+      "updatedAt": "2026-10-21T21:18:04.000Z",
+      "uid": "35240-c66de5e8-3c26-4d5b-a1a2-42cf7be3859b"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://www.googleapis.com/drive/v3",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://www.googleapis.com/drive/v3"
     }
-  ],
-  "info": {
-    "_postman_id": "29920c1a-a631-4678-8e1c-3a3e30c5399f",
-    "name": "Google Drive Files API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder hierarchies, sharing and permissions, and search across a user's Drive.\n\nContact Support:\n Name: Google",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
