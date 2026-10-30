@@ -1,4 +1,4 @@
-# Google Drive (google-drive)
+# Google Drive
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,69 +66,177 @@
 
 The Google Drive API allows developers to integrate with Google Drive to create, read, update, and delete files and folders stored in Google Drive. The v3 REST API supports file metadata operations, content upload and download, folder hierarchies, sharing and permissions, and search across a user's Drive.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/google-drive/refs/heads/main/apis.yml)
+**Areas:** Cloud Storage · Collaboration · Document Management · Drives · File · Google · Storage
 
-## Scope
+## Google Drive on APIs.io
 
-- **Type:** Index
+Everything profiled for Google Drive is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/google-drive/](https://apis.io/providers/google-drive/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- Cloud Storage
-- Collaboration
-- Document Management
-- Drive
-- Files
-- Google
-- Storage
+- [Google Drive Files API](https://apis.io/apis/google-drive/google-drive-files-api/) — The Files API from Google Drive — 4 operation(s) for files.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (5)
 
-### Google Drive API v3
+Multi-step workflows that chain operations into a business task.
 
-REST API for managing files and folders in Google Drive. Supports file metadata operations, content upload and download, sharing and permissions, revisions, comments, and changes feeds.
+- [Google Drive Back Up a File Before Permanently Deleting It](https://apis.io/arazzos/google-drive/google-drive-backup-and-delete-workflow/)
+- [Google Drive Copy a Template File into a Folder](https://apis.io/arazzos/google-drive/google-drive-copy-template-workflow/)
+- [Google Drive Provision a Folder and Seed a File](https://apis.io/arazzos/google-drive/google-drive-provision-folder-workflow/)
+- [Google Drive Share a File and Audit Its Access](https://apis.io/arazzos/google-drive/google-drive-share-file-workflow/)
+- [Google Drive Upsert a File by Name](https://apis.io/arazzos/google-drive/google-drive-upsert-file-by-name-workflow/)
 
-- **Human URL:** [https://developers.google.com/drive/api/v3/about-sdk](https://developers.google.com/drive/api/v3/about-sdk)
-- **Base URL:** `https://www.googleapis.com/drive/v3`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Cloud
-- Collaboration
-- Files
-- Storage
+- [google-drive](https://apis.io/servers/google-drive/google-drive/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://developers.google.com/drive/api/v3/reference)
-- [OpenAPI](openapi/google-drive-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/google-drive.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/google-drive.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/google-drive-file-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Authentication](https://developers.google.com/drive/api/v3/about-auth)
-- [Quickstart](https://developers.google.com/drive/api/v3/quickstart/python)
-- [Pricing](https://workspace.google.com/pricing)
-- [Terms of Service](https://developers.google.com/terms)
-- [O Auth  Scopes](https://developers.google.com/drive/api/v3/about-auth#OAuth2Authorizing)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Google Drive Agentic Access](https://apis.io/agentic-access/google-drive/google-drive-agentic-access/)
 
-- [GitHub Organization](https://github.com/googleworkspace)
-- [Portal](https://console.cloud.google.com/)
-- [Getting Started](https://developers.google.com/drive/api/v3/enable-drive-api)
-- [Authentication](https://developers.google.com/identity/protocols/oauth2)
+#### JSON Schema (4)
+
+The data models the API reads and writes.
+
+- [Google Drive File](https://apis.io/schemas/google-drive/google-drive-file/)
+- [FileList](https://apis.io/schemas/google-drive/google-drive-filelist/)
+- [Permission](https://apis.io/schemas/google-drive/google-drive-permission/)
+- [PermissionList](https://apis.io/schemas/google-drive/google-drive-permissionlist/)
+
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [Google Drive Structure](https://apis.io/json-structure/google-drive/google-drive-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Google Drive Context](https://apis.io/jsonld/google-drive/google-drive-context/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Google Drive API](https://apis.io/collections/google-drive/open-google-drive/)
+- [Google Drive Files API](https://apis.io/collections/google-drive/open-google-drive-files-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Google Drive Openapi Overlay](https://apis.io/overlays/google-drive/google-drive-openapi-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Google Drive — jsonschema rules](https://apis.io/rules/google-drive/google-drive-jsonschema-spectral-rules/)
+- [Google Drive API Rules](https://apis.io/rules/google-drive/google-drive-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Google Drive Authentication](https://apis.io/security/google-drive/google-drive-authentication/)
+- [Google Drive Domain Security](https://apis.io/security/google-drive/google-drive-domain-security/)
+- [Google Drive Trust Center](https://apis.io/security/google-drive/google-drive-trust-center/)
+- [Google Drive Vulnerability Disclosure](https://apis.io/security/google-drive/google-drive-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Google Drive Scopes](https://apis.io/scopes/google-drive/google-drive-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Google Drive Plans Pricing](https://apis.io/plans/google-drive/google-drive-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Google Drive Rate Limits](https://apis.io/rate-limits/google-drive/google-drive-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Google Drive Finops](https://apis.io/finops/google-drive/google-drive-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.google.com/)
+- [Getting started](https://developers.google.com/drive/api/v3/enable-drive-api)
 - [Changelog](https://developers.google.com/drive/api/v3/releases)
-- [Rate Limits](https://developers.google.com/drive/api/v3/handle-errors#rate-limit-exceeded)
-- [Status Page](https://www.google.com/appsstatus)
-- [JSON-LD](json-ld/google-drive-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Features](undefined)
+- [GitHub](https://github.com/googleworkspace)
+- [Status](https://www.google.com/appsstatus)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 47.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 57.2 |
+| Contract governance | 18.2 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 44.0 |
+| Access clarity | 36.8 |
+
+**Agent readiness 40.8** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 41.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/google-drive/](https://apis.io/providers/google-drive/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Google Drive: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/google-drive/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
